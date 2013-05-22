@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="982ce446-7061-4ef3-b363-69484d9b4189" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/fp-growth/fp-tree/node.rb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/fp-growth/fp-tree/fp_tree.rb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/fp-growth/fp-tree/builder/second_pass.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/fp-growth/fp-tree/builder/first_pass.rb" afterPath="$PROJECT_DIR$/lib/fp-growth/fp-tree/builder/first_pass.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/fp-growth/fp-tree/node.rb" afterPath="$PROJECT_DIR$/lib/fp-growth/fp-tree/node.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="fp-growth-ruby.iws" />
@@ -12,8 +14,12 @@
     <file path="/.gitignore" changelist="982ce446-7061-4ef3-b363-69484d9b4189" time="1369247346666" ignored="false" />
     <file path="/README.md" changelist="982ce446-7061-4ef3-b363-69484d9b4189" time="1369247860835" ignored="false" />
     <file path="/fp-growth-ruby.gemspec" changelist="982ce446-7061-4ef3-b363-69484d9b4189" time="1369247997319" ignored="false" />
-    <file path="/first_pass.rb" changelist="982ce446-7061-4ef3-b363-69484d9b4189" time="1369258711094" ignored="false" />
+    <file path="/first_pass.rb" changelist="982ce446-7061-4ef3-b363-69484d9b4189" time="1369262443907" ignored="false" />
     <file path="/transaction.rb" changelist="982ce446-7061-4ef3-b363-69484d9b4189" time="1369255683604" ignored="false" />
+    <file path="/second_pass.rb" changelist="982ce446-7061-4ef3-b363-69484d9b4189" time="1369262524788" ignored="false" />
+    <file path="/node.rb" changelist="982ce446-7061-4ef3-b363-69484d9b4189" time="1369259237873" ignored="false" />
+    <file path="/fp_tree.rb" changelist="982ce446-7061-4ef3-b363-69484d9b4189" time="1369262623732" ignored="false" />
+    <file path="/temp.rb" changelist="982ce446-7061-4ef3-b363-69484d9b4189" time="1369260351584" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,15 +66,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="version.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/fp-growth/ruby/version.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="19" selection-start="35" selection-end="35" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ruby.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/fp-growth/ruby.rb">
           <provider selected="true" editor-type-id="text-editor">
@@ -81,16 +78,34 @@
       <file leaf-file-name="first_pass.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/fp-growth/fp-tree/builder/first_pass.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="22" selection-start="963" selection-end="963" vertical-scroll-proportion="0.0">
+            <state line="39" column="85" selection-start="1050" selection-end="1050" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="node.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="node.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/fp-growth/fp-tree/node.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="8" selection-start="80" selection-end="80" vertical-scroll-proportion="0.033975083">
+            <state line="4" column="39" selection-start="143" selection-end="144" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="second_pass.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/fp-growth/fp-tree/builder/second_pass.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="58" column="12" selection-start="1593" selection-end="1593" vertical-scroll-proportion="0.93447906">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fp_tree.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/fp-growth/fp-tree/fp_tree.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="28" column="17" selection-start="569" selection-end="569" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -140,15 +155,18 @@
         <option value="$PROJECT_DIR$/lib/fp-growth/growth/ruby.rb" />
         <option value="$PROJECT_DIR$/lib/fp-growth/ruby/version.rb" />
         <option value="$PROJECT_DIR$/fp-growth-ruby.gemspec" />
+        <option value="$PROJECT_DIR$/lib/fp-growth/fp-tree/node.rb" />
         <option value="$PROJECT_DIR$/lib/fp-growth/fp-tree/builder/first_pass.rb" />
+        <option value="$PROJECT_DIR$/lib/fp-growth/fp-tree/builder/second_pass.rb" />
+        <option value="$PROJECT_DIR$/lib/fp-growth/fp-tree/fp_tree.rb" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="64" />
-    <option name="y" value="24" />
-    <option name="width" value="929" />
-    <option name="height" value="1057" />
+    <option name="y" value="-4" />
+    <option name="width" value="1857" />
+    <option name="height" value="1085" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -355,6 +373,26 @@
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
       <method />
     </configuration>
+    <configuration default="true" type="RubyRunConfigurationType" factoryName="Ruby">
+      <module name="" />
+      <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
+      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
+      <method />
+    </configuration>
     <configuration default="true" type="TestUnitRunConfigurationType" factoryName="Test::Unit/Shoulda/Minitest">
       <predefined_log_file id="RUBY_TESTUNIT" enabled="true" />
       <module name="" />
@@ -388,6 +426,23 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="982ce446-7061-4ef3-b363-69484d9b4189" name="Default" comment="" />
@@ -397,14 +452,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="24" width="929" height="1057" extended-state="4" />
+    <frame x="64" y="-4" width="1857" height="1085" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32291666" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27014756" sideWeight="0.6763441" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1315644" sideWeight="0.6770833" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -413,7 +469,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3236559" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -480,20 +535,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/fp-growth-ruby.gemspec">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="31" selection-start="253" selection-end="253" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/fp-growth/ruby/version.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="19" selection-start="35" selection-end="35" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/fp-growth/fp-tree/builder/first_pass.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="36" column="25" selection-start="951" selection-end="951" vertical-scroll-proportion="0.0">
@@ -578,14 +619,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/fp-growth/fp-tree/builder/first_pass.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="22" selection-start="963" selection-end="963" vertical-scroll-proportion="0.0">
+        <state line="39" column="85" selection-start="1050" selection-end="1050" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/fp-growth/fp-tree/node.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="8" selection-start="80" selection-end="80" vertical-scroll-proportion="0.033975083">
+        <state line="4" column="39" selection-start="143" selection-end="144" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/fp-growth/fp-tree/fp_tree.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="17" selection-start="569" selection-end="569" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/fp-growth/fp-tree/builder/second_pass.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="58" column="12" selection-start="1593" selection-end="1593" vertical-scroll-proportion="0.93447906">
           <folding />
         </state>
       </provider>

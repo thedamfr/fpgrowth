@@ -6,7 +6,7 @@ module FpGrowth
       class FirstPass
 
         attr_accessor :supports
-        @supports = Hash.new()
+        @supports = Hash.new 0
 
         # Scan data and find support for each item
         # @param transactions FpGrowth::Transaction
@@ -16,7 +16,6 @@ module FpGrowth
           @supports= Hash.new()
           for transaction in transactions
             for item in transaction.items
-              @supports[item]=0 unless @supports[item]
               @supports[item] += 1
             end
 
@@ -37,6 +36,9 @@ module FpGrowth
           return supports
         end
 
+        # Ordonner les items en fonction de le support
+        # Cet ordre est utilisé pour la construction du Tree lors de la seconde passe
+        #
         def sort(supports=@supports)
           supports.sort_by {|_key, value| value}
         end
