@@ -1,6 +1,6 @@
-# Fp::Growth::Ruby
+# Fp-Growth-Ruby
 
-TODO: Write a gem description
+Ruby implementation of FP-Growth
 
 ## Installation
 

@@ -1,17 +1,17 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'fp/growth/ruby/version'
+require 'fp-growth/ruby/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "fp-growth-ruby"
-  spec.version       = Fp::Growth::Ruby::VERSION
+  spec.version       = FpGrowth::VERSION
   spec.authors       = ["thedamfr"]
   spec.email         = ["dam.cavailles@laposte.net"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{FP-Growth implementation}
+  spec.summary       = %q{FP-Growth is mean to detect}
   spec.homepage      = ""
-  spec.license       = "MIT"
+  spec.license       = "GPLv3"
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
