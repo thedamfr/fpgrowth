@@ -1,5 +1,5 @@
 require 'test/unit'
-require "../lib/fp-growth/fp-tree/builder/first_pass"
+require "lib/fpgrowth/fptree/builder/first_pass"
 
 class TestFirstPass < Test::Unit::TestCase
 

@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in fp-growth-growth-ruby.gemspec
+# Specify your gem's dependencies in fpgrowth-growth-ruby.gemspec
 gemspec

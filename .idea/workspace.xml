@@ -2,8 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="982ce446-7061-4ef3-b363-69484d9b4189" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/tc_first_pass.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/fp-growth/fp-tree/builder/first_pass.rb" afterPath="$PROJECT_DIR$/lib/fp-growth/fp-tree/builder/first_pass.rb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/fpgrowth.rb" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/fp-growth/ruby.rb" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/fp-growth-ruby.gemspec" afterPath="$PROJECT_DIR$/fpgrowth-ruby.gemspec" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/fp-growth/fp-tree/builder/first_pass.rb" afterPath="$PROJECT_DIR$/lib/fpgrowth/fptree/builder/first_pass.rb" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/fp-growth/fp-tree/builder/second_pass.rb" afterPath="$PROJECT_DIR$/lib/fpgrowth/fptree/builder/second_pass.rb" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/fp-growth/fp-tree/fp_tree.rb" afterPath="$PROJECT_DIR$/lib/fpgrowth/fptree/fp_tree.rb" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/fp-growth/fp-tree/node.rb" afterPath="$PROJECT_DIR$/lib/fpgrowth/fptree/node.rb" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/fp-growth/models/transaction.rb" afterPath="$PROJECT_DIR$/lib/fpgrowth/models/transaction.rb" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/fp-growth/ruby/version.rb" afterPath="$PROJECT_DIR$/lib/fpgrowth/version.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Rakefile" afterPath="$PROJECT_DIR$/Rakefile" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/tc_first_pass.rb" afterPath="$PROJECT_DIR$/test/tc_first_pass.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="fp-growth-ruby.iws" />
@@ -18,7 +28,8 @@
     <file path="/node.rb" changelist="982ce446-7061-4ef3-b363-69484d9b4189" time="1369259237873" ignored="false" />
     <file path="/fp_tree.rb" changelist="982ce446-7061-4ef3-b363-69484d9b4189" time="1369262623732" ignored="false" />
     <file path="/temp.rb" changelist="982ce446-7061-4ef3-b363-69484d9b4189" time="1369260351584" ignored="false" />
-    <file path="/tc_first_pass.rb" changelist="982ce446-7061-4ef3-b363-69484d9b4189" time="1369264174232" ignored="false" />
+    <file path="/tc_first_pass.rb" changelist="982ce446-7061-4ef3-b363-69484d9b4189" time="1369267019082" ignored="false" />
+    <file path="/ruby.rb" changelist="982ce446-7061-4ef3-b363-69484d9b4189" time="1369267389054" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,17 +67,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fp-growth-ruby.gemspec" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fp-growth-ruby.gemspec">
+      <file leaf-file-name="fpgrowth-ruby.gemspec" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fpgrowth-ruby.gemspec">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="31" selection-start="253" selection-end="253" vertical-scroll-proportion="0.0">
+            <state line="6" column="32" selection-start="208" selection-end="208" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="node.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/fp-growth/fp-tree/node.rb">
+        <entry file="file://$PROJECT_DIR$/lib/fpgrowth/fptree/node.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state line="4" column="39" selection-start="143" selection-end="144" vertical-scroll-proportion="0.0">
               <folding />
@@ -74,8 +85,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="first_pass.rb" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/fp-growth/fp-tree/builder/first_pass.rb">
+      <file leaf-file-name="fpgrowth.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/fpgrowth.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="12" selection-start="12" selection-end="12" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="first_pass.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/fpgrowth/fptree/builder/first_pass.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="33" selection-start="33" selection-end="33" vertical-scroll-proportion="0.0">
               <folding />
@@ -84,7 +104,7 @@
         </entry>
       </file>
       <file leaf-file-name="second_pass.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/fp-growth/fp-tree/builder/second_pass.rb">
+        <entry file="file://$PROJECT_DIR$/lib/fpgrowth/fptree/builder/second_pass.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state line="58" column="12" selection-start="1593" selection-end="1593" vertical-scroll-proportion="0.0">
               <folding />
@@ -95,25 +115,16 @@
       <file leaf-file-name="tc_first_pass.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/tc_first_pass.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="12" selection-start="32" selection-end="32" vertical-scroll-proportion="0.0">
+            <state line="1" column="10" selection-start="30" selection-end="30" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="fp_tree.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/fp-growth/fp-tree/fp_tree.rb">
+        <entry file="file://$PROJECT_DIR$/lib/fpgrowth/fptree/fp_tree.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state line="28" column="17" selection-start="569" selection-end="569" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="transaction.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/fp-growth/models/transaction.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="0" selection-start="114" selection-end="114" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -122,7 +133,7 @@
       <file leaf-file-name="Rakefile" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Rakefile">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="9" column="8" selection-start="129" selection-end="129" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -146,7 +157,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/lib/fp/growth/ruby.rb" />
         <option value="$PROJECT_DIR$/lib/fp/growth/models/transaction.rb" />
@@ -157,8 +167,12 @@
         <option value="$PROJECT_DIR$/lib/fp-growth/fp-tree/node.rb" />
         <option value="$PROJECT_DIR$/lib/fp-growth/fp-tree/builder/second_pass.rb" />
         <option value="$PROJECT_DIR$/lib/fp-growth/fp-tree/fp_tree.rb" />
-        <option value="$PROJECT_DIR$/test/tc_first_pass.rb" />
         <option value="$PROJECT_DIR$/lib/fp-growth/fp-tree/builder/first_pass.rb" />
+        <option value="$PROJECT_DIR$/lib/fpgrowth/ruby.rb" />
+        <option value="$PROJECT_DIR$/Rakefile" />
+        <option value="$PROJECT_DIR$/test/tc_first_pass.rb" />
+        <option value="$PROJECT_DIR$/fpgrowth-ruby.gemspec" />
+        <option value="$PROJECT_DIR$/lib/fpgrowth.rb" />
       </list>
     </option>
   </component>
@@ -240,8 +254,22 @@
               <option name="myItemId" value="lib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="fp-growth" />
+              <option name="myItemId" value="fp-growth-ruby" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fp-growth-ruby" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fpgrowth" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -259,29 +287,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="fp-growth" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ruby" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fp-growth-ruby" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fp-growth-ruby" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fp-growth" />
+              <option name="myItemId" value="fpgrowth" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -303,11 +309,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="fp-growth" />
+              <option name="myItemId" value="fpgrowth" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="fp-tree" />
+              <option name="myItemId" value="fptree" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -325,11 +331,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="fp-growth" />
+              <option name="myItemId" value="fpgrowth" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="fp-tree" />
+              <option name="myItemId" value="fptree" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -352,6 +358,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib/fpgrowth" />
+      <recent name="$PROJECT_DIR$/lib/" />
       <recent name="$PROJECT_DIR$/lib/fp-growth" />
       <recent name="$PROJECT_DIR$/lib/fp-growth/" />
     </key>
@@ -471,10 +479,10 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32291666" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32258064" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27014756" sideWeight="0.6770833" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27014756" sideWeight="0.67741936" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -549,14 +557,14 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lib/fp-growth/ruby.rb">
+    <entry file="file://$PROJECT_DIR$/lib/fpgrowth.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="49" selection-start="88" selection-end="88" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/fp-growth/models/transaction.rb">
+    <entry file="file://$PROJECT_DIR$/lib/fpgrowth/models/transaction.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="0" selection-start="114" selection-end="114" vertical-scroll-proportion="0.0">
           <folding />
@@ -577,37 +585,65 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Rakefile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/fp-growth/models/transaction.rb">
+    <entry file="file://$PROJECT_DIR$/lib/fpgrowth/models/transaction.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="0" selection-start="114" selection-end="114" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/fp-growth/ruby.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="49" selection-start="88" selection-end="88" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/fp-growth/ruby/version.rb">
+    <entry file="file://$PROJECT_DIR$/lib/fpgrowth/version.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1" column="19" selection-start="35" selection-end="35" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fp-growth-ruby.gemspec">
+    <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="31" selection-start="253" selection-end="253" vertical-scroll-proportion="0.0">
+        <state line="8" column="21" selection-start="136" selection-end="136" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/fpgrowth/fptree/builder/second_pass.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="58" column="12" selection-start="1593" selection-end="1593" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/fpgrowth/fptree/fp_tree.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="17" selection-start="569" selection-end="569" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/fpgrowth/fptree/node.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="39" selection-start="143" selection-end="144" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/fpgrowth/fptree/builder/first_pass.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="33" selection-start="33" selection-end="33" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Rakefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="8" selection-start="129" selection-end="129" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/tc_first_pass.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="10" selection-start="30" selection-end="30" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -619,42 +655,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
+    <entry file="file://$PROJECT_DIR$/fpgrowth-ruby.gemspec">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="21" selection-start="136" selection-end="136" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/fp-growth/fp-tree/node.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="39" selection-start="143" selection-end="144" vertical-scroll-proportion="0.0">
+        <state line="6" column="32" selection-start="208" selection-end="208" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/fp-growth/fp-tree/fp_tree.rb">
+    <entry file="file://$PROJECT_DIR$/lib/fpgrowth.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="17" selection-start="569" selection-end="569" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/fp-growth/fp-tree/builder/second_pass.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="12" selection-start="1593" selection-end="1593" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/tc_first_pass.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="12" selection-start="32" selection-end="32" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/fp-growth/fp-tree/builder/first_pass.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="33" selection-start="33" selection-end="33" vertical-scroll-proportion="0.0">
+        <state line="0" column="12" selection-start="12" selection-end="12" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>

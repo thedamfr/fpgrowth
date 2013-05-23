@@ -1,10 +1,10 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'fp-growth/ruby/version'
+require 'fpgrowth/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "fp-growth-ruby"
+  spec.name          = "fpgrowth"
   spec.version       = FpGrowth::VERSION
   spec.authors       = ["thedamfr"]
   spec.email         = ["dam.cavailles@laposte.net"]
