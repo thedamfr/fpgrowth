@@ -1,5 +1,5 @@
-require '../fp_tree'
-require '../node'
+require 'fpgrowth/fptree/fp_tree'
+require 'fpgrowth/fptree/node'
 module FpGrowth
   module FpTree
     module Builder
@@ -14,7 +14,7 @@ module FpGrowth
         def execute(transactions)
           @fp_tree = FpTree.new
           for transaction in transactions
-            sort_transaction(transaction)
+            transaction = sort_transaction(transaction)
             #Look for leaf
             traverse(@fp_tree.root, transaction)
 
@@ -24,9 +24,10 @@ module FpGrowth
         def sort_by_support(transaction)
           lookup = @fp_tree.item_order_lookup
 
-          transaction.sort_by do |item|
-            lookup.fetch(item)
+          transaction = transaction.sort_by do |item|
+            lookup.fetch(item, lookup.size + 1)
           end
+          return transaction
         end
 
         def traverse(cursor_tree, transaction)

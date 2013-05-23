@@ -1,11 +1,43 @@
 require 'test/unit'
+require 'fpgrowth/fptree/builder/second_pass'
+require 'fpgrowth/fptree/builder/first_pass'
 
 class TestSecondPass < Test::Unit::TestCase
 
-  # Called before every test method runs. Can be used
-  # to set up fixture information.
+
   def setup
-    # Do nothing
+    items= ['a', 'b', 'c', 'd', 'e']
+
+    r = Random.new
+
+    @n = r.rand(100..500)
+
+    @random_transactions = []
+    for i in (0..@n)
+
+
+      @m = r.rand(1..5)
+      @random_transactions[i]=[]
+      for j in (0..@m)
+        x = r.rand(10)
+        if x == 9
+          # Trick pour que le 'e' se fasse pruner
+        then
+          @random_transactions[i] << items[r.rand(items.size)]
+        else
+          @random_transactions[i] << items[r.rand(items.size - 1)]
+        end
+      end
+
+    end
+
+    @non_random = [['a', 'b'], ['b'], ['b', 'c'], ['a', 'b']]
+
+
+    firstPass = FpGrowth::FpTree::Builder::FirstPass.new()
+
+    @supports_random = firstPass.execute(@random_transactions)
+    @supports_non_random = firstPass.execute(@non_random)
   end
 
   # Called after every test method runs. Can be used to tear
@@ -15,10 +47,24 @@ class TestSecondPass < Test::Unit::TestCase
     # Do nothing
   end
 
-  # Fake test
-  def test_fail
+  def test_sort_by_support
 
-    # To change this template use File | Settings | File Templates.
-    fail('Not implemented')
+    secondPass = FpGrowth::FpTree::Builder::SecondPass.new(@supports_non_random)
+
+    support_sorted = []
+
+
+    for transaction in @non_random
+      support_sorted << secondPass.sort_by_support(transaction)
+    end
+
+
+    secondPass = FpGrowth::FpTree::Builder::SecondPass.new(@supports_random)
+
+    for transaction in @random_transactions
+        secondPass.sort_by_support(transaction)
+    end
+
   end
+
 end
