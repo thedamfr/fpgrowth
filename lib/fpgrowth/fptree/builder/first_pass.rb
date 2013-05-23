@@ -1,4 +1,4 @@
-require "../../models/transaction"
+require "fpgrowth/models/transaction"
 
 module FpGrowth
   module FpTree
