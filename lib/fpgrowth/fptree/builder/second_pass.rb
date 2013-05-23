@@ -54,7 +54,12 @@ module FpGrowth
         def append_node(cursor_tree, node)
           cursor_tree.children << node
           sort_by_support(cursor_tree.children)
-          @fp_tree.find_lateral_leaf_for_item(node.item).lateral = node
+          left = @fp_tree.find_lateral_leaf_for_item(node.item)
+          if left == nil then
+            @fp_tree.heads[node.item] = node
+          else
+            left.lateral = node
+          end
         end
 
         def continue_pattern(cursor_tree, transaction)
