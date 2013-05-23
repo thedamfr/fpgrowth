@@ -85,9 +85,22 @@ class TestFirstPass < Test::Unit::TestCase
     assert_equal('a',@support_non_random_sorted.keys[1])
 
     for i in (0..(@support_random_sorted.keys.size - 2))
-      assert_operator(@support_random_sorted[@support_random_sorted.keys[i]], ">" , @support_random_sorted[@support_random_sorted.keys[i+1]])
+      assert_operator(@support_random_sorted[@support_random_sorted.keys[i]], ">=" , @support_random_sorted[@support_random_sorted.keys[i+1]])
     end
 
+  end
+
+  def test_execute
+    firstPass = FpGrowth::FpTree::Builder::FirstPass.new()
+
+    non_random_first_passed = firstPass.execute(@non_random)
+    random_first_passed = firstPass.execute(@random_transactions)
+
+    assert_instance_of(Hash, non_random_first_passed)
+    assert_instance_of(Hash, random_first_passed)
+
+    assert_equal(3, non_random_first_passed.size)
+    assert_equal(4, random_first_passed.size)
   end
 
 end
