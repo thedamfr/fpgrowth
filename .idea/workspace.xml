@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="982ce446-7061-4ef3-b363-69484d9b4189" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/fp-growth-ruby.iml" afterPath="$PROJECT_DIR$/.idea/fp-growth-ruby.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="fp-growth-ruby.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="982ce446-7061-4ef3-b363-69484d9b4189" time="1369422963804" ignored="false" />
+    <file path="/Dummy.txt" changelist="982ce446-7061-4ef3-b363-69484d9b4189" time="1369423075688" ignored="false" />
     <file path="/.gitignore" changelist="982ce446-7061-4ef3-b363-69484d9b4189" time="1369247346666" ignored="false" />
     <file path="/README.md" changelist="982ce446-7061-4ef3-b363-69484d9b4189" time="1369247860835" ignored="false" />
     <file path="/fp-growth-ruby.gemspec" changelist="982ce446-7061-4ef3-b363-69484d9b4189" time="1369247997319" ignored="false" />
@@ -551,7 +550,11 @@
       <created>1369422967898</created>
       <updated>1369422967898</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="add Test for Node">
+      <created>1369423088030</created>
+      <updated>1369423088030</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
