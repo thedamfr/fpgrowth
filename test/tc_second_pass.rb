@@ -151,8 +151,16 @@ class TestSecondPass < Test::Unit::TestCase
     assert_equal('a', parent.children.first.item)
 
     assert_equal('b', parent.children.first.children.first.item)
-    assert_equal(2, parent.children.first.children.first.support)
+    assert_equal(1, parent.children.first.children.first.support)
 
+  end
+
+  def test_initialize
+    secondPass = nil
+    assert_nothing_raised {secondPass = FpGrowth::FpTree::Builder::SecondPass.new(@supports_non_random)}
+
+    assert_not_nil(secondPass.fp_tree)
+    assert_equal(@supports_non_random.keys, secondPass.fp_tree.heads.keys)
   end
 
 

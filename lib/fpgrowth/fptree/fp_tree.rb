@@ -11,7 +11,7 @@ module FpGrowth
         @supports = supports
         #initialiser les clés
         for k in @supports.keys
-          @heads[k]
+          @heads[k]=nil
         end
       end
 
