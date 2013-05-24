@@ -31,24 +31,29 @@ module FpGrowth
         end
 
         def traverse(cursor_tree, transaction)
-          found = false
-          i = 0
-          while found == false and i < cursor_tree.children.size
-            if cursor_tree.children[i].item == transaction[0] then
-              continue_pattern(cursor_tree.children[i], transaction[0..transaction.size])
+          if transaction and transaction.size > 0
+            found = false
+            if cursor_tree.item == transaction.first
+              continue_pattern(cursor_tree, transaction)
               found = true
             end
-            i+=1
+            i = 0
+            while found == false and i < cursor_tree.children.size
+              if cursor_tree.children[i].item == transaction[0] then
+                continue_pattern(cursor_tree.children[i], transaction)
+                found = true
+              end
+              i+=1
+            end
+            fork_pattern(cursor_tree, transaction) unless found
           end
-          fork_pattern(cursor_tree, transaction) if found == false
         end
 
         def fork_pattern(cursor_tree, transaction)
-          for item in transaction
-            node = Node.new(item, 1)
-            append_node(cursor_tree, node)
-            cursor_tree = node
-          end
+          node = Node.new(transaction.first, 1)
+          append_node(cursor_tree, node)
+          cursor_tree = node
+          traverse(cursor_tree, transaction[1..transaction.size])
         end
 
         def append_node(cursor_tree, node)
