@@ -16,14 +16,28 @@ class TestNode < Test::Unit::TestCase
     # Do nothing
   end
 
-  # Fake test
+  # Test initialize
   def test_initialize
+    # Test initialize for node = nil
     node = nil
-    assert_nothing_raised {node = FpGrowth::FpTree::Node.new('a')}
+    assert_nothing_raised {node = FpGrowth::FpTree::Node.new()}
+    assert_equal( nil , node.item )
+    assert_equal( 1 , node.support  )
+    assert_equal( [] , node.children )
+    assert_equal( nil , node.lateral)
 
-    assert_equal('a',node.item )
+    # Test initialize for node with first parameter
+    assert_nothing_raised {node = FpGrowth::FpTree::Node.new(14)}
+    assert_equal( 14 , node.item )
+    assert_equal( 1 , node.support  )
 
-    # To change this template use File | Settings | File Templates.
+    # Test initialize for node with two parameter
+    assert_nothing_raised {node = FpGrowth::FpTree::Node.new( 14 , 32)}
+    assert_equal( 14 , node.item )
+    assert_equal( 32 , node.support  )
 
   end
+
+
+
 end
