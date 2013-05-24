@@ -1,6 +1,6 @@
 require 'test/unit'
-require 'fpgrowth/fptree/builder/second_pass'
-require 'fpgrowth/fptree/builder/first_pass'
+require 'fpgrowth/fp_tree/builder/second_pass'
+require 'fpgrowth/fp_tree/builder/first_pass'
 
 
 class TestSecondPass < Test::Unit::TestCase

@@ -1,4 +1,4 @@
-require_relative 'node'
+require_relative 'fp_tree/node'
 
 module FpGrowth
   module FpTree
@@ -37,3 +37,5 @@ module FpGrowth
     end
   end
 end
+
+require_relative 'fp_tree/builder'

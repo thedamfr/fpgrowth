@@ -1,6 +1,6 @@
 require 'test/unit'
-require "fpgrowth/fptree/fp_tree"
-require "fpgrowth/fptree/node"
+require "fpgrowth/fp_tree"
+require "fpgrowth/fp_tree/node"
 
 class TestFpTree < Test::Unit::TestCase
 

@@ -1,5 +1,5 @@
 require 'test/unit'
-require 'fpgrowth/fptree/builder'
+require 'fpgrowth/fp_tree/builder'
 
 class TestBuilder < Test::Unit::TestCase
 

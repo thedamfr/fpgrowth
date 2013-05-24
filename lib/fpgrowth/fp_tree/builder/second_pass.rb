@@ -1,5 +1,4 @@
-require 'fpgrowth/fptree/fp_tree'
-require 'fpgrowth/fptree/node'
+require 'fpgrowth/fp_tree'
 module FpGrowth
   module FpTree
     module Builder
