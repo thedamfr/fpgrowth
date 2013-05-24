@@ -3,7 +3,6 @@ require 'fpgrowth/fptree/builder/second_pass'
 require 'fpgrowth/fptree/builder/first_pass'
 
 
-
 class TestSecondPass < Test::Unit::TestCase
 
 
@@ -64,7 +63,7 @@ class TestSecondPass < Test::Unit::TestCase
     secondPass = FpGrowth::FpTree::Builder::SecondPass.new(@supports_random)
 
     for transaction in @random_transactions
-        secondPass.sort_by_support(transaction)
+      secondPass.sort_by_support(transaction)
     end
 
   end
@@ -76,11 +75,21 @@ class TestSecondPass < Test::Unit::TestCase
 
     secondPass = FpGrowth::FpTree::Builder::SecondPass.new(@supports_non_random)
 
-    assert_nothing_raised() {secondPass.append_node(parent, child)}
+    assert_nothing_raised() { secondPass.append_node(parent, child) }
     assert_not_equal(0, parent.children.size)
     assert_equal(child, parent.children[0])
     assert_equal(child, secondPass.fp_tree.heads['a'])
 
+  end
+
+  def test_continue_pattern
+    parent = FpGrowth::FpTree::Node.new('a')
+    secondPass = FpGrowth::FpTree::Builder::SecondPass.new(@supports_non_random)
+
+    transaction = ['a', 'b']
+
+    assert_nothing_raised() { secondPass.continue_pattern(parent, transaction) }
+    assert_equal(2, parent.support)
 
   end
 

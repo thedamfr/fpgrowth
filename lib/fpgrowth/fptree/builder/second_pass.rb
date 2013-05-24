@@ -44,7 +44,7 @@ module FpGrowth
         end
 
         def fork_pattern(cursor_tree, transaction)
-          for item in transaction.items
+          for item in transaction
             node = Node.new(item, 1)
             append_node(cursor_tree, node)
             cursor_tree = node
