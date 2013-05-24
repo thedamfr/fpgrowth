@@ -8,26 +8,35 @@ module FpGrowth
         attr_accessor :fp_tree
 
         def initialize(supports)
+          @supports = supports
           @fp_tree = FpTree.new(supports)
         end
 
         def execute(transactions)
-          @fp_tree = FpTree.new
+          @fp_tree = FpTree.new(@supports)
           for transaction in transactions
-            transaction = sort_transaction(transaction)
+            transaction = sort_by_support(transaction)
             #Look for leaf
             traverse(@fp_tree.root, transaction)
 
           end
+          return @fp_tree
         end
 
         def sort_by_support(transaction)
           lookup = @fp_tree.item_order_lookup
 
-          transaction = transaction.sort_by do |item|
+          transaction.sort_by! do |item|
             lookup.fetch(item, lookup.size + 1)
           end
-          return transaction
+        end
+
+        def sort_children_by_support(nodes)
+          lookup = @fp_tree.item_order_lookup
+
+          nodes.sort_by! do |node|
+            lookup.fetch(node.item, lookup.size + 1)
+          end
         end
 
         def traverse(cursor_tree, transaction)
@@ -58,7 +67,7 @@ module FpGrowth
 
         def append_node(cursor_tree, node)
           cursor_tree.children << node
-          sort_by_support(cursor_tree.children)
+          sort_children_by_support(cursor_tree.children)
           left = @fp_tree.find_lateral_leaf_for_item(node.item)
           if left == nil then
             @fp_tree.heads[node.item] = node

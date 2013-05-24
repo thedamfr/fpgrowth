@@ -59,6 +59,9 @@ class TestSecondPass < Test::Unit::TestCase
       support_sorted << secondPass.sort_by_support(transaction)
     end
 
+    assert_equal(@supports_non_random.keys.first, support_sorted.first.first)
+    assert_equal(@supports_non_random.keys[1], support_sorted.first[1])
+
 
     secondPass = FpGrowth::FpTree::Builder::SecondPass.new(@supports_random)
 
@@ -66,7 +69,25 @@ class TestSecondPass < Test::Unit::TestCase
       secondPass.sort_by_support(transaction)
     end
 
+
   end
+
+  def test_sort_children_by_support
+
+    secondPass = FpGrowth::FpTree::Builder::SecondPass.new(@supports_non_random)
+
+    list = [FpGrowth::FpTree::Node.new('a'), FpGrowth::FpTree::Node.new('c'), FpGrowth::FpTree::Node.new('b')]
+
+
+    assert_nothing_raised { secondPass.sort_children_by_support(list) }
+
+
+    assert_equal(@supports_non_random.keys.first, list.first.item)
+    assert_equal(@supports_non_random.keys[1], list[1].item)
+
+
+  end
+
 
   def test_append_node
     parent = FpGrowth::FpTree::Node.new()
@@ -100,6 +121,18 @@ class TestSecondPass < Test::Unit::TestCase
     assert_equal(child, parent.children[0])
     assert_equal(child, secondPass.fp_tree.heads['b'])
 
+    # Verifier l'ordre des enfants
+    parent = FpGrowth::FpTree::Node.new()
+    child = FpGrowth::FpTree::Node.new('a')
+    child2 = FpGrowth::FpTree::Node.new('b')
+
+
+    assert_nothing_raised() { secondPass.append_node(parent, child) }
+    assert_nothing_raised() { secondPass.append_node(parent, child2) }
+
+    assert_equal('b', parent.children.first.item)
+    assert_equal('a', parent.children.last.item)
+
 
   end
 
@@ -129,7 +162,7 @@ class TestSecondPass < Test::Unit::TestCase
     parent = FpGrowth::FpTree::Node.new('a')
     secondPass = FpGrowth::FpTree::Builder::SecondPass.new(@supports_non_random)
 
-    transaction = ['a', 'a' ,'b']
+    transaction = ['a', 'a', 'b']
 
     assert_nothing_raised() { secondPass.fork_pattern(parent, transaction) }
     assert_equal('a', parent.children.last.item)
@@ -157,11 +190,23 @@ class TestSecondPass < Test::Unit::TestCase
 
   def test_initialize
     secondPass = nil
-    assert_nothing_raised {secondPass = FpGrowth::FpTree::Builder::SecondPass.new(@supports_non_random)}
+    assert_nothing_raised { secondPass = FpGrowth::FpTree::Builder::SecondPass.new(@supports_non_random) }
 
     assert_not_nil(secondPass.fp_tree)
     assert_equal(@supports_non_random.keys, secondPass.fp_tree.heads.keys)
+    assert_equal(@supports_non_random, secondPass.fp_tree.supports)
   end
 
+  def test_execute
+    secondPass = nil
+    assert_nothing_raised { secondPass = FpGrowth::FpTree::Builder::SecondPass.new(@supports_non_random) }
+
+    assert_nothing_raised { secondPass.execute(@non_random) }
+    for key in secondPass.fp_tree.heads.keys
+      assert_not_nil(secondPass.fp_tree.heads[key])
+    end
+
+
+  end
 
 end
