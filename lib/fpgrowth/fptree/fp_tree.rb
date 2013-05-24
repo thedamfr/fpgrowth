@@ -27,7 +27,7 @@ module FpGrowth
 
       def find_lateral_leaf_for_item(item)
         cursor = heads[item]
-        while cursor != nil do
+        while cursor != nil and cursor.lateral != nil do
           cursor = cursor.lateral
         end
         return cursor

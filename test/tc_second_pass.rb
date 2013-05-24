@@ -73,12 +73,33 @@ class TestSecondPass < Test::Unit::TestCase
     child = FpGrowth::FpTree::Node.new('a')
 
 
+    #Ajout first
     secondPass = FpGrowth::FpTree::Builder::SecondPass.new(@supports_non_random)
+
+    assert_nothing_raised { secondPass.append_node(parent, child) }
+    assert_not_equal(0, parent.children.size)
+    assert_equal(child, parent.children.last)
+    assert_equal(child, secondPass.fp_tree.heads['a'])
+
+    #Ajout lateral
+
+    child = FpGrowth::FpTree::Node.new('a')
+
+    assert_nothing_raised() { secondPass.append_node(parent, child) }
+    assert_not_equal(0, parent.children.size)
+    assert_equal(child, parent.children[1])
+    assert_equal(child, secondPass.fp_tree.heads['a'].lateral)
+
+    #Ajout en profondeur
+    parent = parent.children[0]
+
+    child = FpGrowth::FpTree::Node.new('b')
 
     assert_nothing_raised() { secondPass.append_node(parent, child) }
     assert_not_equal(0, parent.children.size)
     assert_equal(child, parent.children[0])
-    assert_equal(child, secondPass.fp_tree.heads['a'])
+    assert_equal(child, secondPass.fp_tree.heads['b'])
+
 
   end
 
@@ -92,5 +113,45 @@ class TestSecondPass < Test::Unit::TestCase
     assert_equal(2, parent.support)
 
   end
+
+  def test_fork_pattern
+    parent = FpGrowth::FpTree::Node.new(nil)
+    secondPass = FpGrowth::FpTree::Builder::SecondPass.new(@supports_non_random)
+
+    transaction = ['a', 'b']
+
+    assert_nothing_raised() { secondPass.fork_pattern(parent, transaction) }
+    assert_equal('a', parent.children.last.item)
+    assert_equal('b', parent.children.last.children.first.item)
+
+    # Test 2
+
+    parent = FpGrowth::FpTree::Node.new('a')
+    secondPass = FpGrowth::FpTree::Builder::SecondPass.new(@supports_non_random)
+
+    transaction = ['a', 'a' ,'b']
+
+    assert_nothing_raised() { secondPass.fork_pattern(parent, transaction) }
+    assert_equal('a', parent.children.last.item)
+    assert_equal(2, parent.children.last.support)
+    assert_equal('b', parent.children.last.children.first.item)
+
+
+  end
+
+  def test_traverse
+
+    parent = FpGrowth::FpTree::Node.new(nil)
+    secondPass = FpGrowth::FpTree::Builder::SecondPass.new(@supports_non_random)
+
+    transaction = ['a', 'a', 'b']
+
+    assert_nothing_raised() { secondPass.traverse(parent, transaction) }
+    assert_equal(2, parent.children.first.support)
+    assert_equal('a', parent.children.first.item)
+
+
+  end
+
 
 end
