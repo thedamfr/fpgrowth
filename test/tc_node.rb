@@ -1,4 +1,5 @@
 require 'test/unit'
+require "fpgrowth/fptree/node"
 
 class TestNode < Test::Unit::TestCase
 
@@ -16,9 +17,13 @@ class TestNode < Test::Unit::TestCase
   end
 
   # Fake test
-  def test_fail
+  def test_initialize
+    node = nil
+    assert_nothing_raised {node = FpGrowth::FpTree::Node.new('a')}
+
+    assert_equal('a',node.item )
 
     # To change this template use File | Settings | File Templates.
-    fail('Not implemented')
+
   end
 end
