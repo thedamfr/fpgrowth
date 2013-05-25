@@ -1,4 +1,5 @@
 require_relative 'fp_tree/node'
+require_relative 'fp_tree/builder'
 
 require 'graphviz'
 require 'etc'
@@ -7,6 +8,10 @@ module FpGrowth
   module FpTree
     class FpTree
       attr_reader :root, :heads, :supports
+
+      def self.build(transactions, threshold=50)
+         Builder.build(transactions, threshold)
+      end
 
       def initialize(supports={})
         @root = Node.new()
