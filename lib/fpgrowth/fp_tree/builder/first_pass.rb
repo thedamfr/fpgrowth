@@ -6,7 +6,14 @@ module FpGrowth
       class FirstPass
 
         attr_accessor :supports
-        @supports = Hash.new 0
+
+        def initialize(threshold=50)
+
+          @supports = Hash.new 0
+          @threshold = threshold
+
+        end
+
 
         # Scan data and find support for each item
         # @param transactions FpGrowth::Transaction
@@ -26,7 +33,7 @@ module FpGrowth
         # discard unfrequent items
         # @param supports Hash
         #
-        def pruning(transactions=@transactions,supports=@supports, threshold=50)
+        def pruning(transactions=@transactions, supports=@supports, threshold=@threshold)
           sum=0
           for val in supports.values
             sum+=val
@@ -48,14 +55,15 @@ module FpGrowth
         # Cet ordre est utilisé pour la construction du Tree lors de la seconde passe
         #
         def sort(supports=@supports)
-          Hash[(supports.sort_by {|_key, value| value}.reverse)]
+          Hash[(supports.sort_by { |_key, value| value }.reverse)]
 
         end
 
         # Actually make the first pass
         #
-        def execute(transactions)
+        def execute(transactions, threshold=@threshold)
           @transactions = transactions
+          @threshold = threshold
           scan()
           pruning()
           sort()
