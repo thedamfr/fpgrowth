@@ -6,11 +6,11 @@ Ruby implementation of FP-Growth
 
 Add this line to your application's Gemfile:
 
-    gem 'fp-growth-ruby'
+    gem 'fpgrowth-ruby'
 
 And then execute:
 
-    $ bundle
+    $ bundle install
 
 Or install it yourself as:
 
@@ -18,7 +18,13 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Build a tree from transactions:
+
+```ruby
+transactions = [['a', 'b'], ['b'], ['b', 'c'], ['a', 'b']]
+fptree = FpGrowth::FpTree.build(transactions)
+
+```
 
 ## Contributing
 
