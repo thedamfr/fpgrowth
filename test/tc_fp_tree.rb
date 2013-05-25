@@ -1,6 +1,7 @@
 require 'test/unit'
 require "fpgrowth/fp_tree"
 require "fpgrowth/fp_tree/node"
+require "fpgrowth/fp_tree/builder/first_pass"
 
 class TestFpTree < Test::Unit::TestCase
 
@@ -72,6 +73,74 @@ class TestFpTree < Test::Unit::TestCase
 
   # test  find_lateral_leaf_for_item
   def test_find_lateral_leaf_for_item
+
+  end
+
+  def test_sort_children_by_support
+    @non_random = [['a', 'b'], ['b'], ['b', 'c'], ['a', 'b']]
+    @supports_non_random = FpGrowth::FpTree::Builder::FirstPass.new().execute(@non_random)
+
+    secondPass = FpGrowth::FpTree::Builder::SecondPass.new(@supports_non_random)
+
+    list = [FpGrowth::FpTree::Node.new('a'), FpGrowth::FpTree::Node.new('c'), FpGrowth::FpTree::Node.new('b')]
+
+
+    assert_nothing_raised { secondPass.fp_tree.sort_children_by_support(list) }
+
+
+    assert_equal(@supports_non_random.keys.first, list.first.item)
+    assert_equal(@supports_non_random.keys[1], list[1].item)
+
+
+  end
+
+
+  def test_append_node
+    parent = FpGrowth::FpTree::Node.new()
+    child = FpGrowth::FpTree::Node.new('a')
+    @non_random = [['a', 'b'], ['b'], ['b', 'c'], ['a', 'b']]
+    @supports_non_random = FpGrowth::FpTree::Builder::FirstPass.new().execute(@non_random)
+
+
+    #Ajout first
+    secondPass = FpGrowth::FpTree::Builder::SecondPass.new(@supports_non_random)
+
+    assert_nothing_raised { secondPass.fp_tree.append_node(parent, child) }
+    assert_not_equal(0, parent.children.size)
+    assert_equal(child, parent.children.last)
+    assert_equal(child, secondPass.fp_tree.heads['a'])
+
+    #Ajout lateral
+
+    child = FpGrowth::FpTree::Node.new('a')
+
+    assert_nothing_raised() { secondPass.fp_tree.append_node(parent, child) }
+    assert_not_equal(0, parent.children.size)
+    assert_equal(child, parent.children[1])
+    assert_equal(child, secondPass.fp_tree.heads['a'].lateral)
+
+    #Ajout en profondeur
+    parent = parent.children[0]
+
+    child = FpGrowth::FpTree::Node.new('b')
+
+    assert_nothing_raised() { secondPass.fp_tree.append_node(parent, child) }
+    assert_not_equal(0, parent.children.size)
+    assert_equal(child, parent.children[0])
+    assert_equal(child, secondPass.fp_tree.heads['b'])
+
+    # Verifier l'ordre des enfants
+    parent = FpGrowth::FpTree::Node.new()
+    child = FpGrowth::FpTree::Node.new('a')
+    child2 = FpGrowth::FpTree::Node.new('b')
+
+
+    assert_nothing_raised() { secondPass.fp_tree.append_node(parent, child) }
+    assert_nothing_raised() { secondPass.fp_tree.append_node(parent, child2) }
+
+    assert_equal('b', parent.children.first.item)
+    assert_equal('a', parent.children.last.item)
+
 
   end
 

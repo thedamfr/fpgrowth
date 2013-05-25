@@ -78,6 +78,25 @@ module FpGrowth
 
       end
 
+      def sort_children_by_support(nodes)
+        lookup = item_order_lookup
+
+        nodes.sort_by! do |node|
+          lookup.fetch(node.item, lookup.size + 1)
+        end
+      end
+
+      def append_node(cursor_tree, node)
+        cursor_tree.children << node
+        sort_children_by_support(cursor_tree.children)
+        left = find_lateral_leaf_for_item(node.item)
+        if left == nil then
+          @heads[node.item] = node
+        else
+          left.lateral = node
+        end
+      end
+
       def items_count
         sum=0
         for val in supports.values
