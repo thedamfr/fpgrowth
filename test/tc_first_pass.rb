@@ -17,7 +17,7 @@ class TestFirstPass < Test::Unit::TestCase
     for i in (0..@n)
 
 
-      @m = r.rand(1..5)
+      @m = r.rand(0..5)
       @random_transactions[i]=[]
       for j in (0..@m)
         x = r.rand(10)
@@ -31,6 +31,9 @@ class TestFirstPass < Test::Unit::TestCase
       end
 
     end
+
+    #Trick pour qu'une transaction se fasse vider
+    @random_transactions << ['e']
 
     @non_random = [['a', 'b'], ['b'], ['b', 'c'], ['a', 'b']]
 
@@ -66,13 +69,22 @@ class TestFirstPass < Test::Unit::TestCase
 
     firstPass = FpGrowth::FpTree::Builder::FirstPass.new()
 
-    @support_random_pruned = firstPass.pruning(@support_random)
-    @support_non_random_pruned = firstPass.pruning(@support_non_random)
+    random_transactions = @random_transactions.clone()
+    non_random = @non_random.clone()
+
+    @support_random_pruned = firstPass.pruning(random_transactions, @support_random)
+    @support_non_random_pruned = firstPass.pruning(non_random, @support_non_random, 100)
 
     # There must be no pruning, considering the very few element there is
     assert_equal(3, @support_non_random.size)
 
+
     assert_operator(5, ">", @support_random.size)
+    for transaction in random_transactions
+      assert_not_equal(0, transaction.size)
+      assert( not(transaction.include?('e')) , "e doit avoir disparu !")
+    end
+    assert_operator(@random_transactions.size, ">", random_transactions.size)
   end
 
   def test_sort
@@ -81,11 +93,11 @@ class TestFirstPass < Test::Unit::TestCase
     @support_random_sorted = firstPass.sort(@support_random)
     @support_non_random_sorted = firstPass.sort(@support_non_random)
 
-    assert_equal('b',@support_non_random_sorted.keys[0])
-    assert_equal('a',@support_non_random_sorted.keys[1])
+    assert_equal('b', @support_non_random_sorted.keys[0])
+    assert_equal('a', @support_non_random_sorted.keys[1])
 
     for i in (0..(@support_random_sorted.keys.size - 2))
-      assert_operator(@support_random_sorted[@support_random_sorted.keys[i]], ">=" , @support_random_sorted[@support_random_sorted.keys[i+1]])
+      assert_operator(@support_random_sorted[@support_random_sorted.keys[i]], ">=", @support_random_sorted[@support_random_sorted.keys[i+1]])
     end
 
   end

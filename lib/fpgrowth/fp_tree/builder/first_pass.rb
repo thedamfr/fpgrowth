@@ -12,7 +12,7 @@ module FpGrowth
         # @param transactions FpGrowth::Transaction
         #
         #
-        def scan(transactions)
+        def scan(transactions=@transactions)
           @supports= Hash.new(0)
           for transaction in transactions
             for item in transaction
@@ -23,16 +23,24 @@ module FpGrowth
           return @supports
         end
 
-        # discard infrequent items
+        # discard unfrequent items
         # @param supports Hash
         #
-        def pruning(supports=@supports)
+        def pruning(transactions=@transactions,supports=@supports, threshold=50)
           sum=0
           for val in supports.values
             sum+=val
           end
           average = (sum / supports.size).floor
-          supports.delete_if { |key, value| value < (average - (average % 10)) }
+          minimum = (average / 100 * threshold)
+          for transaction in transactions
+            for item in transaction
+              transaction.delete(item) if supports[item] < minimum
+            end
+          end
+          transactions.delete([])
+          supports.delete_if { |key, value| value < minimum }
+
           return supports
         end
 
@@ -47,7 +55,8 @@ module FpGrowth
         # Actually make the first pass
         #
         def execute(transactions)
-          scan(transactions)
+          @transactions = transactions
+          scan()
           pruning()
           sort()
         end
