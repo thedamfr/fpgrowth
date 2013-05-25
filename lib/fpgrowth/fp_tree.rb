@@ -37,7 +37,7 @@ module FpGrowth
         return cursor
       end
 
-      def graphviz
+      def graphviz(fancy_name=nil)
         g = GraphViz.new(:G, :type => :digraph)
         nodonode = {}
         nodonode[self.root]=g.add_nodes(self.root.to_s, :label => "nil")
@@ -74,7 +74,7 @@ module FpGrowth
           end
         end
 
-        g.output(:png => "./graphs/#{Etc.getlogin}-#{items_count}-items-#{Time.now.to_s.gsub(" ", "-")}.png")
+        g.output(:png => "./graphs/#{fancy_name}-#{Etc.getlogin}-#{items_count}-items-#{Time.now.to_s.gsub(" ", "-")}.png")
 
       end
 

@@ -38,8 +38,9 @@ module FpGrowth
           for val in supports.values
             sum+=val
           end
-          average = (sum / supports.size).floor
-          minimum = (average / 100 * threshold)
+          average = (sum / supports.size)
+          minimum = (average.to_f / 100 * threshold).floor
+
           for transaction in transactions
             for item in transaction
               transaction.delete(item) if supports[item] < minimum
