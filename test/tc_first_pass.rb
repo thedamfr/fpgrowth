@@ -73,19 +73,14 @@ class TestFirstPass < Test::Unit::TestCase
     non_random = @non_random.clone()
 
     @support_random_pruned = firstPass.pruning(random_transactions, @support_random.clone, 10)
-    @support_non_random_pruned = firstPass.pruning(non_random, @support_non_random.clone, 100)
+    @support_non_random_pruned = firstPass.pruning(non_random, @support_non_random.clone, 20)
 
     # There must be no pruning, considering the very few element there is
     assert_equal(3, @support_non_random.size, "Supports : "+@support_non_random.to_s)
 
-    sum=0
-    for val in @support_random.values
-      sum+=val
-    end
-    average = (sum / @support_random.size)
-    minimum = (average.to_f / 100 * 100).floor
+    minimum = @random_transactions.size.to_f / 100 * 20
 
-    assert_operator(5, ">", @support_random_pruned.size, "En plus e : #{@support_random['e']} alors que average : #{ average } et minimum : #{minimum}")
+    assert_operator(5, ">", @support_random_pruned.size, "En plus e : #{@support_random['e']} et minimum : #{minimum}")
     for transaction in random_transactions
       assert_not_equal(0, transaction.size)
       assert( not(transaction.include?('e')) , "e doit avoir disparu !")
@@ -112,7 +107,7 @@ class TestFirstPass < Test::Unit::TestCase
     firstPass = FpGrowth::FpTree::Builder::FirstPass.new()
 
     non_random_first_passed = firstPass.execute(@non_random)
-    random_first_passed = firstPass.execute(@random_transactions)
+    random_first_passed = firstPass.execute(@random_transactions, 20)
 
     assert_instance_of(Hash, non_random_first_passed)
     assert_instance_of(Hash, random_first_passed)

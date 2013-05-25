@@ -64,6 +64,7 @@ module FpGrowth
           traverse(cursor_tree, transaction[1..transaction.size])
         end
 
+
         def append_node(cursor_tree, node)
           cursor_tree.children << node
           sort_children_by_support(cursor_tree.children)

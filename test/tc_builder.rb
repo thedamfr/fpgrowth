@@ -43,7 +43,7 @@ class TestBuilder < Test::Unit::TestCase
 
   def test_build
     tree = nil
-    assert_nothing_raised { tree = FpGrowth::FpTree::Builder.build(@non_random) }
+    assert_nothing_raised { tree = FpGrowth::FpTree::Builder.build(@non_random, 0.5) }
     assert_not_nil(tree)
     assert_instance_of(FpGrowth::FpTree::FpTree, tree)
 

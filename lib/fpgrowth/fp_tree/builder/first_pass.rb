@@ -7,7 +7,7 @@ module FpGrowth
 
         attr_accessor :supports
 
-        def initialize(threshold=50)
+        def initialize(threshold=1)
 
           @supports = Hash.new 0
           @threshold = threshold
@@ -34,20 +34,17 @@ module FpGrowth
         # @param supports Hash
         #
         def pruning(transactions=@transactions, supports=@supports, threshold=@threshold)
-          sum=0
-          for val in supports.values
-            sum+=val
-          end
-          average = (sum / supports.size)
-          minimum = (average.to_f / 100 * threshold).floor
+
+          minimum = transactions.size.to_f / 100 * threshold
 
           for transaction in transactions
             for item in transaction
+
               transaction.delete(item) if supports[item] < minimum
             end
           end
           transactions.delete([])
-          supports.delete_if { |key, value| value < minimum }
+          supports.delete_if { |key, value| value < minimum  }
 
           return supports
         end
