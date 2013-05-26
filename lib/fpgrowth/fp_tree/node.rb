@@ -18,6 +18,7 @@ module FpGrowth
         for child in children
           cloned_tail << child.clone_deep()
         end
+        return cloned_tail
       end
 
       # Clone Node, deeply
@@ -28,6 +29,16 @@ module FpGrowth
         clone.item = @item
         clone.support = @support
         clone.children = clone_tail_deep()
+        return clone
+      end
+
+      def ==(other_object)
+        return false unless other_object
+        flag = true
+        flag = false if @item != other_object.item
+        flag = false if @support != other_object.support
+        flag = false if @children != other_object.children
+        return flag
       end
 
     end
