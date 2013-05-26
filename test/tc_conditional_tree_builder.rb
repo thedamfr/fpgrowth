@@ -16,10 +16,22 @@ class TestConditonalTreeBuilder < Test::Unit::TestCase
     # Do nothing
   end
 
-  # Fake test
-  def test_fail
+  def test_execute
+    fp_tree = FpGrowth::FpTree.build([['a', 'b'], ['b'], ['b', 'c'], ['a', 'b']])
+    conditional_tree = nil
 
-    # To change this template use File | Settings | File Templates.
-    fail('Not implemented')
+
+    assert_nothing_raised { conditional_tree = FpGrowth::Miner::ConditionalTreeBuilder.new(fp_tree, 'a').execute }
+
+    assert_equal('b', conditional_tree.root.children.first.item)
+    assert_equal('2', conditional_tree.root.children.first.support)
+    assert_equal('a', conditional_tree.root.children.first.children.first.item)
+    assert_equal('2', conditional_tree.root.children.first.children.first.support)
+
+    assert_equal(true, conditional_tree.single_path?)
+
+    assert_equal(2, conditional_tree.size)
+
+
   end
 end

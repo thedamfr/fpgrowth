@@ -5,17 +5,19 @@ module FpGrowth
     class ConditionalTreeBuilder
 
       def initialize(tree=FpTree.new, pattern)
-        @conditional_tree = tree
+        @tree = tree
+        @conditional_tree = FpTree::FpTree.new(tree.supports)
         @supports = {}
         @horizontal_cursor = tree.heads[pattern]
+        @pattern = pattern
       end
 
 
       def execute()
-        case pattern
+        case @pattern
           when Array
-            return ConditionalTreeBuilder.new(ConditionalTreeBuilder.new(tree, pattern[0]).execute,
-                                              pattern[1..-1]).execute
+            return ConditionalTreeBuilder.new(ConditionalTreeBuilder.new(tree, @pattern[0]).execute,
+                                              @pattern[1..-1]).execute
           else
             horizontal_traversal()
         end
@@ -45,7 +47,7 @@ module FpGrowth
         @vertical_cursor = horizontal_cursor.parent
         @current_branch = down_to_top_traversal()
         @current_branch_root = chain_branch()
-        @current_branch.last << horizontal_cursor.clone_tail_deep()
+        @current_branch.last.children += horizontal_cursor.clone_tail_deep()
         append_branch_to_tree(@current_branch_root)
       end
 
@@ -93,7 +95,7 @@ module FpGrowth
       # It make the new node, with the minimum support
       #
       def down_to_top_traversal_step(current_branch=@current_branch, vertical_cursor=@vertical_cursor, min_support=@min_support)
-        current_branch << Node.new(vertical_cursor.item, min_support)
+        current_branch << FpGrowth::FpTree::Node.new(vertical_cursor.item, min_support)
       end
 
 

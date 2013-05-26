@@ -4,8 +4,8 @@ require_relative 'miner/conditional_tree_builder'
 module FpGrowth
   module Miner
     class Miner
-      def build_conditionnal_tree(tree=FpTree.new, pattern)
-        ConditonnalTreeBuilder.new().execute(tree, pattern)
+      def build_conditional_tree(tree=FpTree.new, pattern)
+        ConditonalTreeBuilder.new(tree, pattern).execute()
       end
     end
   end
