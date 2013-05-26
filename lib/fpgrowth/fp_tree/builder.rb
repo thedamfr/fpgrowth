@@ -11,10 +11,6 @@ module FpGrowth
         supports = first_pass.execute(transactions)
         second_pass = SecondPass.new(supports)
         tree = second_pass.execute(transactions)
-
-        tree.graphviz
-
-
         return tree
       end
 

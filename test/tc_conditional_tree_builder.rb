@@ -17,20 +17,22 @@ class TestConditonalTreeBuilder < Test::Unit::TestCase
   end
 
   def test_execute
-    fp_tree = FpGrowth::FpTree.build([['a', 'b'], ['b'], ['b', 'c'], ['a', 'b']])
+    fp_tree = FpGrowth::FpTree.build([['a', 'b'], ['b'], ['b', 'c'], ['a', 'b']], 0)
     conditional_tree = nil
 
 
     assert_nothing_raised { conditional_tree = FpGrowth::Miner::ConditionalTreeBuilder.new(fp_tree, 'a').execute }
 
+    fp_tree.graphviz()
+    conditional_tree.graphviz("conditional")
+
+
     assert_equal('b', conditional_tree.root.children.first.item)
-    assert_equal('2', conditional_tree.root.children.first.support)
-    assert_equal('a', conditional_tree.root.children.first.children.first.item)
-    assert_equal('2', conditional_tree.root.children.first.children.first.support)
+    assert_equal(2, conditional_tree.root.children.first.support)
+    assert_equal([], conditional_tree.root.children.first.children)
 
     assert_equal(true, conditional_tree.single_path?)
 
-    assert_equal(2, conditional_tree.size)
 
 
   end
