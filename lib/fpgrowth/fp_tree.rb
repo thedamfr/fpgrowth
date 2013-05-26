@@ -93,6 +93,7 @@ module FpGrowth
 
       def append_node(cursor_tree, node)
         cursor_tree.children << node
+        node.parent = cursor_tree
         sort_children_by_support(cursor_tree.children)
         left = find_lateral_leaf_for_item(node.item)
         if left == nil then

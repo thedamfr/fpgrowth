@@ -109,6 +109,7 @@ class TestFpTree < Test::Unit::TestCase
     assert_not_equal(0, parent.children.size)
     assert_equal(child, parent.children.last)
     assert_equal(child, secondPass.fp_tree.heads['a'])
+    assert_equal(parent, child.parent)
 
     #Ajout lateral
 
@@ -128,6 +129,7 @@ class TestFpTree < Test::Unit::TestCase
     assert_not_equal(0, parent.children.size)
     assert_equal(child, parent.children[0])
     assert_equal(child, secondPass.fp_tree.heads['b'])
+    assert_equal(parent, child.parent)
 
     # Verifier l'ordre des enfants
     parent = FpGrowth::FpTree::Node.new()
