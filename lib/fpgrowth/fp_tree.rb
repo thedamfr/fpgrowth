@@ -6,6 +6,11 @@ require 'etc'
 
 module FpGrowth
   module FpTree
+
+    def self.build(transactions, threshold=50)
+      Builder.build(transactions, threshold)
+    end
+
     class FpTree
       attr_reader :root, :heads, :supports
 
@@ -119,6 +124,8 @@ module FpGrowth
           is = false if cursor.children.size > 1
           cursor = cursor.children.first
         end
+
+        return is
       end
 
     end

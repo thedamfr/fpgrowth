@@ -90,8 +90,6 @@ class TestFpTree < Test::Unit::TestCase
 
     assert_equal(@supports_non_random.keys.first, list.first.item)
     assert_equal(@supports_non_random.keys[1], list[1].item)
-
-
   end
 
 
@@ -142,12 +140,19 @@ class TestFpTree < Test::Unit::TestCase
 
     assert_equal('b', parent.children.first.item)
     assert_equal('a', parent.children.last.item)
-
-
   end
 
   def test_single_path
-    fail("ToDo")
+    child = FpGrowth::FpTree::Node.new('a')
+
+    fptree = FpGrowth::FpTree.build([ ['b','a']*3])
+
+    assert_equal(true, fptree.single_path?)
+
+    fptree.append_node(fptree.root, child)
+
+    assert_equal(false, fptree.single_path?)
+
   end
 
 end
