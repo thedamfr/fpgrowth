@@ -62,9 +62,9 @@ module FpGrowth
         def execute(transactions, threshold=@threshold)
           @transactions = transactions
           @threshold = threshold
-          scan()
-          pruning()
-          sort()
+          scan
+          pruning
+          sort
         end
 
       end
