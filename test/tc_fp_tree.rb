@@ -146,4 +146,8 @@ class TestFpTree < Test::Unit::TestCase
 
   end
 
+  def test_single_path
+    fail("ToDo")
+  end
+
 end

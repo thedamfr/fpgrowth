@@ -38,6 +38,12 @@ class TestNode < Test::Unit::TestCase
 
   end
 
+  def test_clone_tail_deep
+    fail("To Do")
+  end
 
+  def test_clone
+    fail("To Do")
+  end
 
 end

@@ -10,7 +10,7 @@ module FpGrowth
       attr_reader :root, :heads, :supports
 
       def self.build(transactions, threshold=50)
-         Builder.build(transactions, threshold)
+        Builder.build(transactions, threshold)
       end
 
       def initialize(supports={})
@@ -110,6 +110,15 @@ module FpGrowth
         end
         return sum
 
+      end
+
+      def single_path?
+        is = true
+        cursor = @root
+        while is and cursor != nil
+          is = false if cursor.children.size > 1
+          cursor = cursor.children.first
+        end
       end
 
     end
