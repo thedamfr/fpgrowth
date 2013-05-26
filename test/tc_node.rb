@@ -82,11 +82,20 @@ class TestNode < Test::Unit::TestCase
   end
 
   def test_equal
-    fail("To Do")
+    a = FpGrowth::FpTree::Node.new('c', 2)
+    b = FpGrowth::FpTree::Node.new('c', 2)
+
+    assert_equal(a, a)
+    assert_equal(a, b)
+
   end
 
   def test_clone
-    fail("To Do")
+    a = FpGrowth::FpTree::Node.new('c', 2)
+    b = FpGrowth::FpTree::Node.new('c', 2)
+
+    assert_equal(a, b)
+    assert_not_same(a, b)
   end
 
 end
