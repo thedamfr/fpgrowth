@@ -9,7 +9,7 @@ module FpGrowth
       def self.build(transactions, threshold=50)
         first_pass = FirstPass.new(threshold)
         supports = first_pass.execute(transactions)
-        second_pass = SecondPass.new(supports)
+        second_pass = SecondPass.new(supports, threshold)
         tree = second_pass.execute(transactions)
         return tree
       end

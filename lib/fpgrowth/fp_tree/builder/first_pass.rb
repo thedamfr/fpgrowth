@@ -44,7 +44,7 @@ module FpGrowth
             end
           end
           transactions.delete([])
-          supports.delete_if { |key, value| value < minimum  }
+          supports.delete_if { |key, value| value < minimum }
 
           return supports
         end
@@ -54,7 +54,6 @@ module FpGrowth
         #
         def sort(supports=@supports)
           Hash[(supports.sort_by { |_key, value| value }.reverse)]
-
         end
 
         # Actually make the first pass

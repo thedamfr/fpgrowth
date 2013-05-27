@@ -1,4 +1,3 @@
-require_relative '../fp_tree'
 require_relative 'pattern'
 require 'fpgrowth/fp_tree'
 
@@ -6,82 +5,120 @@ module FpGrowth
   module Miner
     class ConditionalTreeBuilder
 
-      def initialize(tree=FpTree.new, pattern)
-        @tree = tree
-        @horizontal_cursor = tree.heads[pattern]
-        @conditional_pattern = pattern
-        @patterns=[]
+      def initialize(pattern_base=[], threshold=1)
+        @pattern_base = pattern_base
+        @threshold = threshold
       end
 
+      def execute(pattern_base=@pattern_base, threshold=@threshold)
+        @pattern_base = pattern_base
+        @threshold = threshold
+        first_pass
+        @fp_tree = FpTree::FpTree.new(@supports)
+        second_pass
+      end
 
-      def execute()
-        case @conditional_pattern
-          when Array
-            return ConditionalTreeBuilder.new(ConditionalTreeBuilder.new(tree, @conditional_pattern[0]).execute,
-                                              @conditional_pattern[1..-1]).execute
-          else
-            horizontal_traversal()
+      def second_pass(pattern_base=@pattern_base)
+        @fp_tree = FpTree::FpTree.new(@supports)
+        for pattern in pattern_base
+          pattern = sort_by_support(pattern)
+          #Look for leaf
+          traverse(@fp_tree.root, pattern)
         end
-        return FpTree.build(make_transactions())
+        return @fp_tree
       end
 
-      def make_transactions(patterns=@patterns)
-        transactions = []
-        for pattern in patterns
-          for i in (1..pattern.support)
-            transactions << pattern.content.clone
+      def first_pass(pattern_base=@pattern_base, threshold=@threshold)
+        @pattern_base = pattern_base
+        @threshold = threshold
+        scan
+        pruning
+        sort
+      end
+
+      def scan(pattern_base=@pattern_base)
+        @supports= Hash.new(0)
+        for pattern in pattern_base
+          for item in pattern.content
+            @supports[item] += pattern.support
           end
+
         end
-        return transactions
+        return @supports
       end
 
-      # Method accountable of horizontal tree traversal
+      # discard unfrequent items
+      # @param supports Hash
       #
-      def horizontal_traversal(horizontal_cursor=@horizontal_cursor)
-        @horizontal_cursor=horizontal_cursor
-        while @horizontal_cursor != nil
-          horizontal_traversal_step()
-          @horizontal_cursor = @horizontal_cursor.lateral
+      def pruning(pattern_base=@pattern_base, supports=@supports, threshold=@threshold)
+
+        total = 0
+        pattern_base.each { |x| total += x.support}
+        minimum = total.to_f / 100 * threshold
+
+        for pattern in pattern_base
+          for item in pattern.content
+            pattern.content.delete(item) if supports[item] < minimum
+          end
+          pattern_base.delete_if { |value| value.content.empty? }
+        end
+        supports.delete_if { |key, value| value < minimum }
+
+        return supports
+      end
+
+      # Ordonner les items en fonction de le support
+      # Cet ordre est utilisé pour la construction du Tree lors de la seconde passe
+      #
+      def sort(supports=@supports)
+        Hash[(supports.sort_by { |_key, value| value }.reverse)]
+      end
+
+
+      def sort_by_support(pattern_base)
+        lookup = @fp_tree.item_order_lookup
+
+        pattern_base.content.sort_by! do |item|
+          lookup.fetch(item, lookup.size + 1)
+        end
+        return pattern_base
+      end
+
+
+      def traverse(cursor_tree, pattern_base)
+        if pattern_base and pattern_base.size > 0
+          found = false
+          if cursor_tree.item == pattern_base.content.first
+            continue_pattern(cursor_tree, pattern_base)
+            found = true
+          end
+          i = 0
+          while found == false and i < cursor_tree.children.size
+            if cursor_tree.children[i].item == pattern_base.content[0] then
+              continue_pattern(cursor_tree.children[i], pattern_base)
+              found = true
+            end
+            i+=1
+          end
+          fork_pattern(cursor_tree, pattern_base) unless found
         end
       end
 
-      # Method accountable of treating each branch
-      #
-      # Make a copy of the pattern branch and append it to tree
-      #
-      # To achieve it, it make a list of the upper nodes
-      # Then build a Pattern
-      #
-      def horizontal_traversal_step(horizontal_cursor=@horizontal_cursor)
-        @min_support = horizontal_cursor.support
-        @current_branch = []
-        @vertical_cursor = horizontal_cursor.parent
-        @current_branch = down_to_top_traversal()
-        @patterns << Pattern.new(@current_branch, @min_support)
+
+      def fork_pattern(cursor_tree, pattern_base)
+        node = FpTree::Node.new(pattern_base.content.first, pattern_base.support)
+        @fp_tree.append_node(cursor_tree, node)
+        cursor_tree = node
+        traverse(cursor_tree, Pattern.new(pattern_base.content[1..-1], pattern_base.support))
       end
 
 
-      # Method accountable of reading the upper part of the branch
-      #
-      # Each step, it makes a new node with the same item, but with minimum support
-      # Then the new node is added to a list
-      # Finally, the list is reversed
-      #
-      def down_to_top_traversal(current_branch=@current_branch, vertical_cursor=@vertical_cursor)
-        while vertical_cursor != nil and vertical_cursor.item != nil
-          down_to_top_traversal_step()
-          vertical_cursor = vertical_cursor.parent
-        end
-        current_branch.reverse!
+      def continue_pattern(cursor_tree, pattern_base)
+        cursor_tree.support+=pattern_base.support
+        traverse(cursor_tree, Pattern.new(pattern_base.content[1..-1], pattern_base.support))
       end
 
-      # Method wich represent a step of the vertical down_to_top_traversal
-      #
-      # It just gather items
-      #
-      def down_to_top_traversal_step(current_branch=@current_branch, vertical_cursor=@vertical_cursor, min_support=@min_support)
-        current_branch << vertical_cursor.item
-      end
+
     end
   end
 end

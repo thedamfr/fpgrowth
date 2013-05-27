@@ -7,18 +7,18 @@ require 'etc'
 module FpGrowth
   module FpTree
 
-    def self.build(transactions, threshold=50)
+    def self.build(transactions, threshold=1)
       Builder.build(transactions, threshold)
     end
 
     class FpTree
-      attr_reader :root, :heads, :supports
+      attr_reader :root, :heads, :supports, :threshold
 
-      def self.build(transactions, threshold=50)
+      def self.build(transactions, threshold=1)
         Builder.build(transactions, threshold)
       end
 
-      def initialize(supports={})
+      def initialize(supports={}, threshold=1)
         @root = Node.new()
         @heads = Hash.new nil
         @supports = supports
@@ -26,6 +26,7 @@ module FpGrowth
         for k in @supports.keys
           @heads[k]=nil
         end
+        @threshold=threshold
       end
 
       def item_order_lookup

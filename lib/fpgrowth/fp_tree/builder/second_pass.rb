@@ -6,9 +6,9 @@ module FpGrowth
 
         attr_accessor :fp_tree
 
-        def initialize(supports)
+        def initialize(supports, threshold=1)
           @supports = supports
-          @fp_tree = FpTree.new(supports)
+          @fp_tree = FpTree.new(supports, threshold)
         end
 
         def execute(transactions)
