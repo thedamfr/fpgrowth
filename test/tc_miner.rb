@@ -24,7 +24,7 @@ class TestMiner < Test::Unit::TestCase
 
     items= ['a', 'b', 'c', 'd', 'e']
 
-            # Randomized
+    # Randomized
 
     r = Random.new
     @n = r.rand(100..500)
@@ -57,4 +57,60 @@ class TestMiner < Test::Unit::TestCase
     conditional_tree.graphviz("conditional-#{fp_tree.heads.keys[-2]}")
 
   end
+
+  def test_fp_growth
+    fp_tree = FpGrowth::FpTree.build([['a', 'b'], ['b'], ['b', 'c'], ['a', 'b']], 0)
+    pattern_set = nil
+
+    assert_nothing_raised { pattern_set = FpGrowth::Miner.fp_growth(fp_tree) }
+    assert_not_equal(0, pattern_set.size)
+
+
+
+  end
+
+  def test_fp_growth_randomized
+    # Randomized
+
+    items= ['a', 'b', 'c', 'd', 'e', 'f','g','h','i','j','k']
+    r = Random.new
+    @n = r.rand(100..500)
+    @random_transactions = []
+    for i in (0..@n)
+
+
+      @m = r.rand(0..5)
+      @random_transactions[i]=[]
+      for j in (0..@m)
+        x = r.rand(21)
+        if x == 20
+          # Trick pour que le 'e' se fasse pruner
+        then
+          @random_transactions[i] << items[r.rand(items.size)]
+        else
+          @random_transactions[i] << items[r.rand(items.size - 1)]
+        end
+      end
+
+    end
+
+    #Trick pour qu'une transaction se fasse vider
+    @random_transactions << ['e']
+
+    fp_tree = FpGrowth::FpTree.build(@random_transactions, 10)
+    pattern_set = nil
+
+    assert_nothing_raised { pattern_set = FpGrowth::Miner.fp_growth(fp_tree) }
+    assert_not_equal(0, pattern_set.size)
+
+
+    for pattern in pattern_set
+      puts "<#{pattern.content}:#{pattern.support}>"
+    end
+
+
+
+    fail("ToDo")
+  end
+
 end

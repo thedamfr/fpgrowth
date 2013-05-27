@@ -129,6 +129,23 @@ module FpGrowth
         return is
       end
 
+      def combinations
+        raise "Tree contains multiple paths" unless single_path?
+        array = []
+        item = @root.children.first
+        while item != nil
+          array << item
+          item = item.children.first
+        end
+        yss = 1.upto(array.size).flat_map do |n|
+          array.combination(n).to_a
+        end
+      end
+
+      def empty?
+        return @heads.empty?
+      end
+
     end
   end
 end

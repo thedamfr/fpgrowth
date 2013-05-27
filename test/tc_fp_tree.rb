@@ -155,4 +155,14 @@ class TestFpTree < Test::Unit::TestCase
 
   end
 
+  def test_combination
+    fp_tree = FpGrowth::FpTree.build([['a', 'b'], ['b'], ['b', 'c', 'a'], ['a', 'b']], 0)
+    assert_equal(true, fp_tree.single_path?)
+    power_set = nil
+    assert_nothing_raised { power_set = fp_tree.combinations }
+
+    fail("ToDo")
+
+  end
+
 end

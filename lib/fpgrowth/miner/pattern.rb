@@ -38,6 +38,10 @@ module FpGrowth
         @content.size
       end
 
+      def clone
+        return Pattern.new(@content.clone, @support)
+      end
+
     end
   end
 end
