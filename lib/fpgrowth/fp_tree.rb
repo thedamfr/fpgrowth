@@ -56,7 +56,7 @@ module FpGrowth
         for row in self.heads.values
           node=row
           while node != nil
-            nodonode[node]= g.add_nodes(node.to_s, :label => node.item + " : " + node.support.to_s)
+            nodonode[node]= g.add_nodes(node.to_s, :label => node.item.to_s + " : " + node.support.to_s)
             node = node.lateral
           end
         end

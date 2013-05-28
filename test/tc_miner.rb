@@ -69,7 +69,7 @@ class TestMiner < Test::Unit::TestCase
 
   end
 
-  def test_fp_growth_randomized
+  def fp_growth_randomized
     # Randomized
 
     items= ['a', 'b', 'c', 'd', 'e', 'f','g','h','i','j','k']

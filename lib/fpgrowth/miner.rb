@@ -32,9 +32,6 @@ module FpGrowth
 
 
       def fp_growth(fp_tree, pattern_alpha=Pattern.new(), rank=0)
-        string = ""
-        pattern_alpha.content.each { |x| string += x}
-        fp_tree.graphviz("rank-#{rank}-conditional-#{string}")
         if fp_tree.single_path?
           # Fin de la récursivité
           for combination in fp_tree.combinations
@@ -47,7 +44,7 @@ module FpGrowth
             @pattern_set << pattern_beta
           end
         else
-          for item in fp_tree.heads.keys
+          for item in fp_tree.supports.keys
             # generate pattern_beta = item U pattern_alpha with support = item.support
             # construct pattern_beta's conditional pattern base and then pattern_beta's conditionnal FpTree
             pattern_beta = pattern_alpha.clone

@@ -1,7 +1,8 @@
-require "../lib/fpgrowth/version.rb"
+require "fpgrowth/version.rb"
 
 module FpGrowth
   # Your code goes here...
 end
 
-require 'lib/fpgrowth/fptree/builder/first_pass'
+require 'fpgrowth/fp_tree'
+require 'fpgrowth/miner'

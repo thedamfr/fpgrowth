@@ -14,7 +14,6 @@ module FpGrowth
         @pattern_base = pattern_base
         @threshold = threshold
         first_pass
-        @fp_tree = FpTree::FpTree.new(@supports)
         second_pass
       end
 
