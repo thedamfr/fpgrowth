@@ -48,9 +48,12 @@ class MyTest < Test::Unit::TestCase
 
     patterns.sort! { |a, b| a.support <=> b.support }.reverse!
 
+=begin
     for pattern in patterns
       puts "#{pattern.content} #{pattern.support}"
     end
+=end
 
+    assert_not_equal(0, patterns.size)
   end
 end
