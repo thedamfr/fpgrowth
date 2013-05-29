@@ -7,7 +7,7 @@ Ruby implementation of FP-Growth
 FP-Growth is an algorithm used for mining frequent pattern in an item set. Such pattern are then used to build association rules.
 Literature example is { Potatoes, Onions } => { Burger } or { Beer, Chips } => { Dippers }.
 
-FP-Growth is known as a solution for Mining without Candidate generation (http://dl.acm.org/citation.cfm?id=335372).
+FP-Growth is known as a solution for Mining without Candidate generation (<http://dl.acm.org/citation.cfm?id=335372>).
 Main alternative to FP-Growth is A Priori which is a pretty much a naive solution. A Priori consist in generating candidate then scanning the database looking for them.
 
 FP-Growth solution is about reducing the database in one simple Tree Structure : The FP-Tree. The FP-Tree make easy to extract frequent pattern from it.
@@ -70,12 +70,12 @@ FpGrowth::Miner.fp_growth(fp_tree)
 
 As we said, worst case is a is a DataSet with long transactions and where each item is significantly frequent. Solution would be to higher the threshold level, which would result in data-loss, maybe critical data would be lost...
 
-A better solution, described is following articles : [http://dl.acm.org/citation.cfm?id=1133907 , http://link.springer.com/chapter/10.1007/978-3-540-24775-3_19]
+A better solution, described is following articles : [<http://dl.acm.org/citation.cfm?id=1133907> , <http://link.springer.com/chapter/10.1007/978-3-540-24775-3_19>]
 Main concept is pruning the tree, once built in order to remove the less significant patterns. This is necessary to allow developer to prune his tree, losing least frequent pattern, in order to quickly obtain the most frequent ones.
 
 This is next step in our Roadmap.
 
-This is also a necessary step for allowing a Top-Down FP-Growth implementation as described in : http://link.springer.com/chapter/10.1007/3-540-47887-6_34
+This is also a necessary step for allowing a Top-Down FP-Growth implementation as described in : <http://link.springer.com/chapter/10.1007/3-540-47887-6_34>
 
 This last implementation is more scalable and more efficient than the current one.
 
