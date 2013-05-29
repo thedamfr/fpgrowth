@@ -24,8 +24,8 @@ class TestOpenDataMTLSondage < Test::Unit::TestCase
     # Do nothing
   end
 
-  # Fake test
-  def test_fp_growth
+
+  def  fp_growth
 
     d = Time.now
     puts "Start time : "+d.to_s
@@ -33,17 +33,17 @@ class TestOpenDataMTLSondage < Test::Unit::TestCase
     fp_tree = FpGrowth::FpTree.build(@transactions, 1)
 
     puts "Tree built at :"+Time.now.to_s
-    patterns = FpGrowth::Miner.fp_growth(fp_tree)
-
-    f=Time.now
-    puts "Mining took #{(f-d)}sec"
-
-    patterns.sort! { |a, b| a.support <=> b.support }.reverse!
-
-    for pattern in patterns
-      puts "#{pattern.content} #{pattern.support}"
-    end
-
-    assert_not_equal(0, patterns.size)
+    #patterns = FpGrowth::Miner.fp_growth(fp_tree)
+    #
+    #f=Time.now
+    #puts "Mining took #{(f-d)}sec"
+    #
+    #patterns.sort! { |a, b| a.support <=> b.support }.reverse!
+    #
+    #for pattern in patterns
+    #  puts "#{pattern.content} #{pattern.support}"
+    #end
+    #
+    #assert_not_equal(0, patterns.size)
   end
 end

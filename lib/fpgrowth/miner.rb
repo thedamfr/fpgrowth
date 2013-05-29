@@ -42,7 +42,7 @@ module FpGrowth
               pattern_beta << node
             end
             @pattern_set << pattern_beta
-            puts "Pattern extracted : #{pattern_beta.content.to_s}"
+            #puts "Pattern extracted : #{pattern_beta.content.to_s}"
           end
         else
           for item in fp_tree.supports.keys
