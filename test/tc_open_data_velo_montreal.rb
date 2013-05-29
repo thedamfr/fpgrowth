@@ -1,9 +1,8 @@
 require 'test/unit'
 require 'fpgrowth'
 require 'csv'
-require 'pp'
 
-class MyTest < Test::Unit::TestCase
+class TestOpenDataVelo < Test::Unit::TestCase
 
 
   def setup
