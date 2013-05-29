@@ -74,12 +74,12 @@ module FpGrowth
       end
 
 
-      def sort_by_support(pattern_base)
-        lookup = @fp_tree.item_order_lookup
-
+      def sort_by_support(pattern_base, fp_tree=@fp_tree)
+        lookup = fp_tree.item_order_lookup
         pattern_base.content.sort_by! do |item|
-          lookup.fetch(item, lookup.size + 1)
+          fp_tree.supports.fetch(item, fp_tree.supports.size + 1)
         end
+        pattern_base.content.reverse!
         return pattern_base
       end
 
@@ -116,6 +116,24 @@ module FpGrowth
         cursor_tree.support+=pattern_base.support
         traverse(cursor_tree, Pattern.new(pattern_base.content[1..-1], pattern_base.support))
       end
+
+      #fonction qui sert uniquement pour les tests
+      def test_execute_threshold(value = 1)
+        if   value == @threshold
+        then  return true
+        end
+        return false
+      end
+
+      def test_execute_pattern_base(value = [])
+        if  value == @pattern_base
+        then  return true
+        end
+        return false
+      end
+
+
+
 
 
     end
