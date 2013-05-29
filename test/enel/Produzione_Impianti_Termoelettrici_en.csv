@@ -1,0 +1,46 @@
+Regione	Provincia	Comune	Centrale	Tipo	Sezioni	Potenza Lorda (MW)
+Piemonte	Vercelli	Trino	"Termoelettrica  ""Galileo Ferraris"" Trino (VC)"	Ciclo Combinato 	2	744
+	Alessandria	Alessandria	Termoelettrica Alessandria	Turbogas	2	176
+Veneto	Rovigo	Porto Tolle	Termoelettrica Porto Tolle	Olio  	4	"2,640"
+	Venezia	Venezia	"Termoelettrica ""Andrea Palladio"" Fusina (VE)"	Carbone / Metano / CDR / Olio / Idrogeno	6	"1,148"
+	Venezia	Venezia	Termoelettrica Porto Marghera	Carbone	2	140
+Emilia Romagna	Piacenza	Castel San Giovanni	"Termoelettrica ""Edoardo Amaldi"" La Casella (PC)"	Ciclo Combinato	4	"1,558"
+	Ravenna	Porto Corsini	"Termoelettrica ""Teodora"" Porto Corsini (RA)"	Ciclo Combinato 	2	761
+	Modena	Carpi	Termoelettrica Carpi Modenese	Turbogas	2	176
+Liguria	La Spezia	La Spezia	"Termoelettrica ""Eugenio Montale"" La Spezia (SP)"	Ciclo Combinato / Carbone	3	"1,282"
+	Genova	Genova	Termoelettrica Genova	Carbone 	3	295
+Toscana	Livorno	Piombino	Termoelettrica Piombino	Olio	4	"1,280"
+	Livorno	Livorno	Termoelettrica Livorno	Olio  	2	310
+	Livorno	Porto Ferraio	Termoelettrica Porto Ferraio	Diesel	1	17
+	Livorno	Isola  Capraia	Termoelettrica Capraia	Diesel	4	1.7
+	Arezzo	Cavriglia	"Termoelettrica ""Santa Barbara"" Cavriglia (AR)"	Ciclo Combinato 	1	394
+Marche	Ancona	Camerata Picena	Termoelettrica Camerata Picena	Turbogas	4	104
+Umbria	Perugia	Piegaro	"Termoelettrica ""Franco Rasetti"" Pietrafitta - Piegaro (PG)"	Turbogas / Ciclo Combinato	3	535
+	Perugia	Gualdo Cattaneo	"Termoelettrica ""Pietro Vannucci"" Bastardo - Giano dell' Umbria  (PG)"	Carbone	2	150
+Lazio	Viterbo	Montalto di Castro	"Termoelettrica ""Alessandro Volta"" Montalto di Castro (VT)"	Olio  / Gas Naturale	4	"3,580"
+	Roma	Civitavecchia	Termoelettrica Torrevaldaliga Nord	Carbone	3	"1,980"
+	Latina	Isola Ventotene	Termoelettrica Ventotene	Diesel	4	1.92
+Molise	Campobasso	Larino	Termoelettrica Larino	Turbogas	2	250
+	Campobasso	Campomarino	Termoelettrica Campomarino	Turbogas	1	88
+Campania	Napoli	Giugliano in Campania	Termoelettrica Giugliano	Turbogas	4	352
+	Caserta	Maddaloni	Termoelettrica Maddaloni	Turbogas	4	352
+Puglia	Brindisi	Brindisi	"Termoelettrica ""Federico II"" Brindisi"	Carbone	4	"2,640"
+	Bari	Bari	Termoelettrica Bari	Olio - Gas	3	206
+Calabria	Cosenza	Rossano Calabro	Termoelettrica Rossano	Olio - Gas	4	"1,738"
+	Cosenza	Laino Borgo	Termoelettrica Mercure	Biomasse	1	41
+Sicilia	Palermo	Termini Imerese	"Termoelettrica ""Ettore Majorana"""	 Gas / Turbogas / Ciclo Combinato	4	"1,330"
+	Siracusa	Priolo Gargallo	"Termoelettrica ""Archimede"""	Ciclo Combinato	2	780
+	Siracusa	Augusta	Termoelettrica Augusta	Olio	3	210
+	Agrigento	Porto Empedocle	Termoelettrica Porto Empedocle	Olio 	2	140
+"Sicilia
+( Isole EOLIE)"	Messina	Lipari	Termoelettrica Vulcano	Diesel	6	8.96
+	Messina	Lipari	Termoelettrica Panarea	Diesel	6	4
+	Messina	Lipari	Termoelettrica Stromboli	Diesel	6	3.1
+	Messina	Lipari	Termoelettrica Filicudi	Diesel	6	1.5
+	Messina	Lipari	Termoelettrica Alicudi	Diesel	3	0.5
+	Messina	Santa Maria Salina	Termoelettrica Santa Maria Salina	Diesel	5	4.4
+	Messina	Malfa	Termoelettrica Malfa	Diesel	2	2.2
+Sardegna	Carbonia-Iglesias	Portoscuso	"Termoelettrica ""Grazia Deledda"" Sulcis "	Carbone / Biomasse	2	590
+	Carbonia-Iglesias	Portoscuso	Termoelettrica Portoscuso	Olio 	2	320
+	Cagliari	Assemini	Termoelettrica Assemini	Turbogas	2	177
+					Totale (MW)	"26,510"

@@ -59,11 +59,15 @@ The larger is the number of transactions, the smaller should be the threshold. I
 
 ```ruby
 transactions = [['a', 'b'], ['b'], ['b', 'c'], ['a', 'b']]
-fp_tree = FpGrowth::FpTree.build(transactions, 30) # 30 stands for 30% of transactions. Here, 'c' would be pruned.
+fp_tree = FpGrowth::FpTree.build(transactions, 30)
+# 30 stands for 30% of transactions. Here, 'c' would be pruned.
 FpGrowth::Miner.fp_growth(fp_tree)
 
 ```
 
+### Examples
+
+You can find in the test repository a few concrete example on Open Data.
 
 
 ## Development : Next steps
