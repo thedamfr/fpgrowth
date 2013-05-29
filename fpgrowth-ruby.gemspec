@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.description   = %q{FP-Growth implementation}
   spec.summary       = %q{FP-Growth is mean to detect}
   spec.homepage      = ""
-  spec.license       = "GPLv3"
+  spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
