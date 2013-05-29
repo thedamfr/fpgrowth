@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["dam.cavailles@laposte.net"]
   spec.description   = %q{FP-Growth implementation}
   spec.summary       = %q{FP-Growth is mean to detect}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/thedamfr/fpgrowth"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
