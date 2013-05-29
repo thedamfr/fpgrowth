@@ -65,6 +65,9 @@ FpGrowth::Miner.fp_growth(fp_tree)
 
 ```
 
+### Examples
+
+You can find in the test repository a few concrete example on Open Data.
 
 
 ## Development : Next steps
