@@ -17,6 +17,8 @@ class TestConditionalTreeBuilder < Test::Unit::TestCase
     @tableau_pattern_one_element << FpGrowth::Miner::Pattern.new(['a'], 12)
 
     @supports_exemple = {'a' => 1, 'b' => 5, 'c' => 4}
+    @supports_exemple_for_pruning = {'a' => 4, 'b' => 5, 'c' => 3}
+
     @pattern_exemple = FpGrowth::Miner::Pattern.new(['a', 'b'], 2)
   end
 
@@ -52,14 +54,51 @@ class TestConditionalTreeBuilder < Test::Unit::TestCase
 
   def test_execute
 
+    # no argument
+    conditional_tree_builder = nil
+    assert_nothing_raised { conditional_tree_builder = FpGrowth::Miner::ConditionalTreeBuilder.new() }
+    assert_nothing_raised { conditional_tree_builder.execute }
+    assert_equal(true, conditional_tree_builder.test_execute_threshold(1))
+    assert_equal(true, conditional_tree_builder.test_execute_pattern_base())
+
+    # One element
+    assert_nothing_raised { conditional_tree_builder = FpGrowth::Miner::ConditionalTreeBuilder.new(@tableau_pattern_one_element , 1) }
+    assert_nothing_raised { conditional_tree_builder.execute }
+    assert_equal(true, conditional_tree_builder.test_execute_threshold(1))
+    assert_equal(true, conditional_tree_builder.test_execute_pattern_base(@tableau_pattern_one_element))
+
+    # Three element
+    assert_nothing_raised { conditional_tree_builder = FpGrowth::Miner::ConditionalTreeBuilder.new(@tableau_pattern , 1) }
+    assert_nothing_raised { conditional_tree_builder.execute }
+    assert_equal(true, conditional_tree_builder.test_execute_threshold(1))
+    assert_equal(true, conditional_tree_builder.test_execute_pattern_base(@tableau_pattern))
 
   end
 
   def test_second_pass
+    # Test unit impossible (Fp-tree)
 
   end
 
   def test_first_pass
+    # no elements
+    conditional_tree_builder = nil
+    assert_nothing_raised { conditional_tree_builder = FpGrowth::Miner::ConditionalTreeBuilder.new() }
+    assert_nothing_raised { conditional_tree_builder.first_pass}
+    assert_equal(true, conditional_tree_builder.test_execute_threshold(1))
+    assert_equal(true, conditional_tree_builder.test_execute_pattern_base())
+
+    #One element
+    assert_nothing_raised { conditional_tree_builder = FpGrowth::Miner::ConditionalTreeBuilder.new(@tableau_pattern_one_element , 1) }
+    assert_nothing_raised { conditional_tree_builder.first_pass}
+    assert_equal(true, conditional_tree_builder.test_execute_threshold(1))
+    assert_equal(true, conditional_tree_builder.test_execute_pattern_base(@tableau_pattern_one_element))
+
+    #Three element
+    assert_nothing_raised { conditional_tree_builder = FpGrowth::Miner::ConditionalTreeBuilder.new(@tableau_pattern , 1) }
+    assert_nothing_raised { conditional_tree_builder.first_pass}
+    assert_equal(true, conditional_tree_builder.test_execute_threshold(1))
+    assert_equal(true, conditional_tree_builder.test_execute_pattern_base(@tableau_pattern))
 
   end
 
@@ -83,6 +122,33 @@ class TestConditionalTreeBuilder < Test::Unit::TestCase
 
   def test_pruning
 
+    conditional_tree_builder = nil
+    support_prining = nil
+
+    assert_nothing_raised { conditional_tree_builder = FpGrowth::Miner::ConditionalTreeBuilder.new() }
+    # with arguments
+    supports = @supports_exemple
+    pattern_base = @tableau_pattern_one_element
+    supports_pruning = nil
+    assert_nothing_raised {supports_pruning = conditional_tree_builder.pruning(pattern_base , supports , 1)}
+
+    # There must be no pruning, considering the very few element there is
+    assert_equal(3, supports_pruning.size, "Supports : "+@support_non_random.to_s)
+
+    # with arguments
+    supports = @supports_exemple
+    pattern_base = @tableau_pattern_one_element
+    supports_pruning = nil
+    assert_nothing_raised {supports_pruning = conditional_tree_builder.pruning(pattern_base , supports , 33)}
+
+    assert_equal(2, supports_pruning.size, "Supports : "+@support_non_random.to_s)
+    assert_equal(5, supports_pruning['b'])
+    assert_equal(4, supports_pruning['c'])
+
+    supports = @supports_exemple_for_pruning
+    pattern_base = @tableau_pattern
+    supports_pruning = conditional_tree_builder.pruning(pattern_base , supports , 1 )
+    assert_equal(4, supports_pruning['a'])
   end
 
   def test_sort
@@ -118,18 +184,23 @@ class TestConditionalTreeBuilder < Test::Unit::TestCase
     assert_equal(['b', 'a'], pattern_base.content, "en plus, #{fp_tree.supports.to_s}")
     assert_equal(2, pattern_base.support)
 
-    #Two element
+    #Three element
     assert_nothing_raised { pattern_base = conditional_tree_builder.sort_by_support(FpGrowth::Miner::Pattern.new(['a','b','c'],2), fp_tree) }
 
     assert_equal(['b', 'c', 'a'], pattern_base.content, "en plus, #{fp_tree.supports.to_s}")
     assert_equal(2, pattern_base.support)
-
-
   end
 
   def test_traverse
-
+    # Test unit impossible
   end
 
+  def test_fork_pattern
+    # Test unit impossible (like traverse )
+  end
+
+  def test_continue_pattern
+    # Test unit impossible (like traverse )
+  end
 
 end
