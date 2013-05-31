@@ -5,7 +5,7 @@ module FpGrowth
   module Miner
     class PatternBaseExtractor
 
-      def initialize(tree=FpTree.new, item)
+      def initialize(tree=FpTree::FpTree.new() , item)
         @tree = tree
         @horizontal_cursor = tree.heads[item]
         @conditional_item = item
@@ -65,6 +65,31 @@ module FpGrowth
       def down_to_top_traversal_step(current_branch=@current_branch, vertical_cursor=@vertical_cursor, min_support=@min_support)
         current_branch << vertical_cursor.item
       end
+
+
+      #fonction qui sert uniquement pour les tests
+      def test_conditionnal_item(item )
+        if   item == @conditional_item
+        then  return true
+        end
+        return false
+      end
+
+      def test_patterns(patterns = [])
+        if  patterns == @pattern_base
+        then  return true
+        end
+        return false
+      end
+
+      def test_tree(tree = FpTree::FpTree.new() )
+        if  tree.threshold == @tree.threshold and tree.root == @tree.root
+        then  return true
+        end
+        return false
+      end
+
+
     end
   end
 end
