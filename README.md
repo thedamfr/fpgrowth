@@ -65,6 +65,15 @@ FpGrowth::Miner.fp_growth(fp_tree)
 
 ```
 
+If you want to avoid worst case, then you should make a Bonzai !
+```ruby
+bonzai = fp_tree.to_bonzai(20)
+FpGrowth::Miner.fp_growth(bonzai)
+
+```
+20 stands for a hardness of 20%. It mean that a node is cut from the tree if it's not greater than 20% of it's father support.
+
+
 ### Examples
 
 You can find in the test repository a few concrete example on Open Data.

@@ -1,5 +1,6 @@
 require_relative 'fp_tree/node'
 require_relative 'fp_tree/builder'
+require_relative 'fp_tree/bonzai_secateur'
 
 require 'graphviz'
 require 'etc'
@@ -18,8 +19,16 @@ module FpGrowth
         Builder.build(transactions, threshold)
       end
 
-      def initialize(supports={}, threshold=1)
-        @root = Node.new()
+      def to_bonzai(hardness=20)
+         return BonzaiSecateur.new(self, hardness).execute()
+      end
+
+      def to_bonzai!(hardness=20)
+        return BonzaiSecateur.new(self, hardness).execute!()
+      end
+
+      def initialize(supports={}, threshold=1, root=Node.new())
+        @root = root
         @heads = Hash.new nil
         @supports = supports
         #initialiser les clés
@@ -109,13 +118,18 @@ module FpGrowth
         end
       end
 
+      def cut_branch(node)
+        node.children.each { |child| cut_branch(child)}
+        remove(node)
+      end
+
       def remove(node)
         # Remove from lateral linked list
         left = @heads[node.item]
-        while left != node or left.lateral != node
-          left = left.traversal
+        while left != nil and left != node and left.lateral != node
+          left = left.lateral
         end
-        if left == node then
+        if left == node or left == nil then
           heads[node.item]=node.lateral
         else
           left.lateral = node.lateral
@@ -128,7 +142,7 @@ module FpGrowth
         node.parent.children.delete(node)
 
         # Remove from support
-        @supports[node.item]-=node.support
+        @supports[node.item] -= node.support if @supports[node.item]
 
 
       end
@@ -171,9 +185,9 @@ module FpGrowth
       end
 
       def clone
-        clone = FpTree.new(@supports, @threshold)
-        root_clone = @root.clone_deep
+        clone = FpTree.new(@supports, @threshold, @root.clone_deep)
         clone.link_down()
+        return clone
       end
 
       def link_down(cursor=@root)
@@ -183,6 +197,12 @@ module FpGrowth
           append_node(cursor, child)
         }
         children.each { |child| link_down(child) }
+      end
+
+      def size(subtree=@root)
+        sum = 1
+        subtree.children.each { |child| sum+= size(child)}
+        return sum
       end
 
     end

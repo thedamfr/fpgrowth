@@ -11,7 +11,7 @@ class TestOpenDataMTLSondage < Test::Unit::TestCase
     CSV.foreach("test/montreal-sondage/mtlsat12.csv", {:headers => true, :header_converters => :symbol, :header_converters => :symbol, :converters => :all, :encoding => 'windows-1251:utf-8'}) do |row|
       transaction = row.to_a
       transaction.delete_if { |item|
-        item[0].to_s.include?("dm") or (item[0].to_s.include?("sd80m") and item[1].to_s == '2') or item[1] == nil  or item[1] == nil or item[1].to_s == " "  or item[1].to_s.empty?
+        item[0].to_s.include?("dm") or (item[0].to_s.include?("sd80m") and item[1].to_s == '2') or item[1] == nil or item[1] == nil or item[1].to_s == " " or item[1].to_s.empty?
       }
       @transactions << transaction
 
@@ -25,25 +25,33 @@ class TestOpenDataMTLSondage < Test::Unit::TestCase
   end
 
 
-  def  fp_growth
+  def test_fp_growth
 
     d = Time.now
     puts "Start time : "+d.to_s
 
     fp_tree = FpGrowth::FpTree.build(@transactions, 1)
 
-    puts "Tree built at :"+Time.now.to_s
-    #patterns = FpGrowth::Miner.fp_growth(fp_tree)
-    #
-    #f=Time.now
-    #puts "Mining took #{(f-d)}sec"
-    #
-    #patterns.sort! { |a, b| a.support <=> b.support }.reverse!
-    #
-    #for pattern in patterns
-    #  puts "#{pattern.content} #{pattern.support}"
-    #end
-    #
-    #assert_not_equal(0, patterns.size)
+    loop = Time.now
+    puts "Tree built in :"+loop.to_s
+
+    bonzai = fp_tree.to_bonzai 50
+
+    loop2 = Time.now
+    puts "Tree bonzaied from #{fp_tree.size} to #{bonzai.size} in :l#{loop2 - loop}"
+
+    bonzai.graphviz
+    #patterns = FpGrowth::Miner.fp_growth(bonzai)
+
+    f=Time.now
+    puts "Mining took #{(f-d)}sec"
+
+    patterns.sort! { |a, b| a.support <=> b.support }.reverse!
+
+    for pattern in patterns
+      puts "#{pattern.content} #{pattern.support}"
+    end
+
+    assert_not_equal(0, patterns.size)
   end
 end
