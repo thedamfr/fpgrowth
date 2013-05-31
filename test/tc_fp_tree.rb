@@ -174,4 +174,8 @@ class TestFpTree < Test::Unit::TestCase
     fail("ToDo")
   end
 
+  def test_remove
+    fail("ToDo")
+  end
+
 end

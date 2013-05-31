@@ -109,6 +109,30 @@ module FpGrowth
         end
       end
 
+      def remove(node)
+        # Remove from lateral linked list
+        left = @heads[node.item]
+        while left != node or left.lateral != node
+          left = left.traversal
+        end
+        if left == node then
+          heads[node.item]=node.lateral
+        else
+          left.lateral = node.lateral
+        end
+
+        # attach childrens
+        node.parent.children += node.children
+
+        # Remove from parents
+        node.parent.children.delete(node)
+
+        # Remove from support
+        @supports[node.item]-=node.support
+
+
+      end
+
       def items_count
         sum=0
         for val in supports.values
