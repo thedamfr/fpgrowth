@@ -146,6 +146,21 @@ module FpGrowth
         return @heads.empty?
       end
 
+      def clone
+        clone = FpTree.new(@supports, @threshold)
+        root_clone = @root.clone_deep
+        clone.link_down()
+      end
+
+      def link_down(cursor=@root)
+        children = cursor.children.clone
+        cursor.children=[]
+        children.each { |child|
+          append_node(cursor, child)
+        }
+        children.each { |child| link_down(child) }
+      end
+
     end
   end
 end

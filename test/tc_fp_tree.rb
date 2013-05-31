@@ -170,4 +170,8 @@ class TestFpTree < Test::Unit::TestCase
 
   end
 
+  def test_clone
+    fail("ToDo")
+  end
+
 end
