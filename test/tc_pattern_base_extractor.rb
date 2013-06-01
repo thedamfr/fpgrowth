@@ -83,27 +83,33 @@ class TestPatternBaseExtractor < Test::Unit::TestCase
 
   end
 
-  def down_to_top_traversal
+  def test_down_to_top_traversal
+
+    # No Test because the current branch is nil for the function down_to_top_vertical
     current_branch = nil
     pattern_base_extractor = nil
     fp_tree = FpGrowth::FpTree.build(@transactions)
 
     assert_nothing_raised { pattern_base_extractor = FpGrowth::Miner::PatternBaseExtractor.new(fp_tree, 'c') }
-    assert_nothing_raised { current_branch = pattern_base_extractor.down_to_top_traversal( [] , fp_tree.heads['c'].support ) }
+    assert_nothing_raised { current_branch = pattern_base_extractor.down_to_top_traversal( [] , fp_tree.heads['c'].parent ) }
+    assert_equal( ["b"] , current_branch)
 
-    assert_equal( [] , current_branch)
-
-    fail('Rhaaaaaaaaaaa')
-    #assert_equal(true , pattern_base_extractor.test_min_support(fp_tree.heads['c'].support) )
-    #assert_equal(true , pattern_base_extractor.test_min_support(fp_tree.heads['c'].support) )
-    #assert_equal(true , pattern_base_extractor.test_min_support(fp_tree.heads['c'].support) )
-    #assert_equal(true , pattern_base_extractor.test_min_support(fp_tree.heads['c'].support) )
-    #assert_equal(true , pattern_base_extractor.test_min_support(fp_tree.heads['c'].support) )
 
 
   end
 
-  def down_to_top_traversal_step
+  def test_down_to_top_traversal_step
+
+    current_branch = nil
+    pattern_base_extractor = nil
+    fp_tree = FpGrowth::FpTree.build(@transactions)
+
+    assert_nothing_raised { pattern_base_extractor = FpGrowth::Miner::PatternBaseExtractor.new(fp_tree, 'c') }
+    assert_nothing_raised { current_branch = pattern_base_extractor.down_to_top_traversal_step( [] , fp_tree.heads['c'].parent ) }
+    assert_equal( ["b"] , current_branch)
+
+
+
 
   end
 

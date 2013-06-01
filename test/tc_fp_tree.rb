@@ -207,6 +207,8 @@ class TestFpTree < Test::Unit::TestCase
   end
 
   def test_clone
+    fp_tree = FpGrowth::FpTree.build([['a', 'b'], ['b'], ['b', 'c'], ['a', 'b'], ['a', 'b', 'c']], 0)
+
     fail("ToDo")
   end
 
