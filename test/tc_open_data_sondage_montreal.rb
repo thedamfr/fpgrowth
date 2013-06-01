@@ -47,10 +47,10 @@ class TestOpenDataMTLSondage < Test::Unit::TestCase
     f=Time.now
     puts "Mining took #{(f-d)}sec"
 
-    patterns.sort! { |a, b| a.support <=> b.support }.reverse!
+   # patterns.sort! { |a, b| a.support <=> b.support }.reverse!
 
     for pattern in patterns
-      puts "#{pattern.content} #{pattern.support}"
+   #   puts "#{pattern.content} #{pattern.support}"
     end
 
     assert_not_equal(0, patterns.size)
