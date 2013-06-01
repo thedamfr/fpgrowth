@@ -33,15 +33,16 @@ class TestOpenDataMTLSondage < Test::Unit::TestCase
     fp_tree = FpGrowth::FpTree.build(@transactions, 1)
 
     loop = Time.now
-    puts "Tree built in :"+loop.to_s
+    puts "Tree of size #{fp_tree.size} built in :#{loop-d}"
 
-    bonzai = fp_tree.to_bonzai 50
+
+    bonzai = fp_tree.to_bonzai! 90
 
     loop2 = Time.now
-    puts "Tree bonzaied from #{fp_tree.size} to #{bonzai.size} in :l#{loop2 - loop}"
+    puts "Tree bonzaied to #{bonzai.size}-#{bonzai.max_width} in :#{loop2 - loop} sec"
 
-    bonzai.graphviz
-    #patterns = FpGrowth::Miner.fp_growth(bonzai)
+
+    patterns = FpGrowth::Miner.fp_growth(bonzai)
 
     f=Time.now
     puts "Mining took #{(f-d)}sec"

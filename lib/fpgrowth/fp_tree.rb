@@ -20,7 +20,7 @@ module FpGrowth
       end
 
       def to_bonzai(hardness=20)
-         return BonzaiSecateur.new(self, hardness).execute()
+        return BonzaiSecateur.new(self, hardness).execute()
       end
 
       def to_bonzai!(hardness=20)
@@ -78,7 +78,7 @@ module FpGrowth
           node=row
           while node != nil
             for child in node.children
-              g.add_edges(nodonode[node], nodonode[child])
+              g.add_edges(nodonode[node], nodonode[child]) if nodonode[child]
             end
             node = node.lateral
           end
@@ -88,7 +88,6 @@ module FpGrowth
         for row in self.heads.values
           node=row
           while node != nil
-
             g.add_edges(nodonode[node], nodonode[node.lateral], :style => :dashed, :constraint => :false) if node.lateral
             node = node.lateral
           end
@@ -119,24 +118,38 @@ module FpGrowth
       end
 
       def cut_branch(node)
-        node.children.each { |child| cut_branch(child)}
+        node.children.each { |child| cut_branch(child) }
         remove(node)
+      end
+
+      def remove_from_lateral(node, verbose=false)
+        if @heads[node.item].equal?(node)
+          if node.lateral
+            @heads[node.item] = node.lateral
+          else
+            @heads.delete(node.item)
+          end
+        else
+          puts "node #{node.to_s}"     if verbose
+          puts "pas head" if verbose
+          left = @heads[node.item]
+          while left != nil and not left.equal? node and not  left.lateral.equal? node
+            left = left.lateral
+          end
+          puts "left found #{left.lateral}" if verbose
+          left.lateral = node.lateral if left
+          puts "left found #{left.lateral}" if verbose
+        end
+        node.lateral=nil
       end
 
       def remove(node)
         # Remove from lateral linked list
-        left = @heads[node.item]
-        while left != nil and left != node and left.lateral != node
-          left = left.lateral
-        end
-        if left == node or left == nil then
-          heads[node.item]=node.lateral
-        else
-          left.lateral = node.lateral
-        end
+        remove_from_lateral(node)
 
         # attach childrens
         node.parent.children += node.children
+        node.children.each { |x| x.parent = node.parent }
 
         # Remove from parents
         node.parent.children.delete(node)
@@ -201,9 +214,44 @@ module FpGrowth
 
       def size(subtree=@root)
         sum = 1
-        subtree.children.each { |child| sum+= size(child)}
+        subtree.children.each { |child| sum+= size(child) }
         return sum
       end
+
+      def max_width
+        max_width=0
+        for cursor in @heads.values
+          width=0
+          while cursor != nil
+            width+=1
+            cursor = cursor.lateral
+          end
+          max_width = width if max_width < width
+        end
+        return max_width
+      end
+
+      def has_lateral_cycle?
+        i = 0
+        while i < @heads.keys.size
+          key = @heads.keys[i]
+          cursor = @heads[key]
+          stack = []
+          flag = false
+          j=0
+          while cursor != nil and not flag
+            flag = true if stack.include?(cursor.object_id)
+            stack.push(cursor.object_id)
+            cursor = cursor.lateral
+            j += 1
+            #puts "#{i}/#{@heads.keys.size} - #{j}"
+          end
+          return key if flag
+          i += 1
+        end
+        return false
+      end
+
 
     end
   end

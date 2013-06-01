@@ -12,8 +12,8 @@ class TestMiner < Test::Unit::TestCase
 
     conditional_tree = FpGrowth::Miner.build_conditional_tree(fp_tree, 'a')
 
-    fp_tree.graphviz()
-    conditional_tree.graphviz("conditional")
+    #fp_tree.graphviz()
+    #conditional_tree.graphviz("conditional")
 
 
     assert_equal('b', conditional_tree.root.children.first.item)
@@ -53,8 +53,8 @@ class TestMiner < Test::Unit::TestCase
     fp_tree = FpGrowth::FpTree.build(@random_transactions, 1)
     conditional_tree = FpGrowth::Miner.build_conditional_tree(fp_tree, fp_tree.heads.keys[-2])
 
-    fp_tree.graphviz()
-    conditional_tree.graphviz("conditional-#{fp_tree.heads.keys[-2]}")
+    #fp_tree.graphviz()
+    #conditional_tree.graphviz("conditional-#{fp_tree.heads.keys[-2]}")
 
   end
 

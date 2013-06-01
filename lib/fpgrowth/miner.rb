@@ -37,12 +37,12 @@ module FpGrowth
           for combination in fp_tree.combinations
             # generate pattern_beta U pattern_alpha
             # with support = minimum support of nodes in pattern_beta
-            pattern_beta = pattern_alpha.clone
+             pattern_beta = pattern_alpha.clone
             for node in combination
               pattern_beta << node
             end
             @pattern_set << pattern_beta
-            puts "Pattern extracted : #{pattern_beta.content.to_s}"
+            #puts "Pattern extracted : #{pattern_beta.content.to_s} - #{pattern_beta.support}"
           end
         else
           for item in fp_tree.supports.keys

@@ -23,32 +23,32 @@ class TestFpTree < Test::Unit::TestCase
 
     fp_tree = nil
     # no arguments
-    assert_nothing_raised {fp_tree = FpGrowth::FpTree::FpTree.new()}
-    assert_not_nil( fp_tree.root )
-    assert_instance_of( FpGrowth::FpTree::Node , fp_tree.root )
-    assert_instance_of( Hash , fp_tree.heads )
-    assert_equal( {} , fp_tree.supports )
+    assert_nothing_raised { fp_tree = FpGrowth::FpTree::FpTree.new() }
+    assert_not_nil(fp_tree.root)
+    assert_instance_of(FpGrowth::FpTree::Node, fp_tree.root)
+    assert_instance_of(Hash, fp_tree.heads)
+    assert_equal({}, fp_tree.supports)
 
     # list empty
-    assert_nothing_raised {fp_tree = FpGrowth::FpTree::FpTree.new({})}
-    assert_not_nil( fp_tree.root )
-    assert_instance_of( FpGrowth::FpTree::Node , fp_tree.root )
-    assert_instance_of( Hash , fp_tree.heads )
-    assert_equal( {} , fp_tree.supports )
+    assert_nothing_raised { fp_tree = FpGrowth::FpTree::FpTree.new({}) }
+    assert_not_nil(fp_tree.root)
+    assert_instance_of(FpGrowth::FpTree::Node, fp_tree.root)
+    assert_instance_of(Hash, fp_tree.heads)
+    assert_equal({}, fp_tree.supports)
 
 
     # list with arguments
-    support =  { 'a' => 1, 'b' => 2}
-    assert_nothing_raised {fp_tree = FpGrowth::FpTree::FpTree.new(support)}
-    assert_not_nil( fp_tree.root )
-    assert_instance_of( FpGrowth::FpTree::Node , fp_tree.root )
-    assert_instance_of( Hash , fp_tree.heads )
-    assert( fp_tree.heads.has_key?('a') , "a n'existe pas")
-    assert( fp_tree.heads.has_key?('b') ,"b n'existe pas !" )
-    assert_equal( 2 , fp_tree.heads.length )
-    assert( fp_tree.supports.has_key?('a') , "a n'existe pas")
-    assert( fp_tree.supports.has_key?('b') ,"b n'existe pas !" )
-    assert_equal( 2 , fp_tree.supports.length )
+    support = {'a' => 1, 'b' => 2}
+    assert_nothing_raised { fp_tree = FpGrowth::FpTree::FpTree.new(support) }
+    assert_not_nil(fp_tree.root)
+    assert_instance_of(FpGrowth::FpTree::Node, fp_tree.root)
+    assert_instance_of(Hash, fp_tree.heads)
+    assert(fp_tree.heads.has_key?('a'), "a n'existe pas")
+    assert(fp_tree.heads.has_key?('b'), "b n'existe pas !")
+    assert_equal(2, fp_tree.heads.length)
+    assert(fp_tree.supports.has_key?('a'), "a n'existe pas")
+    assert(fp_tree.supports.has_key?('b'), "b n'existe pas !")
+    assert_equal(2, fp_tree.supports.length)
 
   end
 
@@ -58,16 +58,16 @@ class TestFpTree < Test::Unit::TestCase
     # look up with fp_tree nul
     fp_tree = nil
     # no arguments
-    assert_nothing_raised {fp_tree = FpGrowth::FpTree::FpTree.new()}
+    assert_nothing_raised { fp_tree = FpGrowth::FpTree::FpTree.new() }
     lookup = fp_tree.item_order_lookup
-    assert_equal( {} , lookup )
+    assert_equal({}, lookup)
 
     # look up with fp_tree non null
-    support =  { 'a' => 1, 'b' => 2}
-    assert_nothing_raised {fp_tree = FpGrowth::FpTree::FpTree.new(support)}
+    support = {'a' => 1, 'b' => 2}
+    assert_nothing_raised { fp_tree = FpGrowth::FpTree::FpTree.new(support) }
     lookup = fp_tree.item_order_lookup
-    assert_equal( 0  , lookup['a'] )
-    assert_equal( 1  , lookup['b'] )
+    assert_equal(0, lookup['a'])
+    assert_equal(1, lookup['b'])
 
   end
 
@@ -145,7 +145,7 @@ class TestFpTree < Test::Unit::TestCase
   def test_single_path
     child = FpGrowth::FpTree::Node.new('a')
 
-    fptree = FpGrowth::FpTree.build([ ['b','a']*3])
+    fptree = FpGrowth::FpTree.build([['b', 'a']*3])
 
     assert_equal(true, fptree.single_path?)
 
@@ -162,11 +162,47 @@ class TestFpTree < Test::Unit::TestCase
     power_set = nil
     assert_nothing_raised { power_set = fp_tree.combinations }
 
-    assert_not_nil( power_set)
-    assert_not_nil( power_set[1])
-    assert_not_nil( power_set[2])
-    assert_not_nil( power_set[3])
-    assert_not_nil( power_set[4])
+    assert_not_nil(power_set)
+    assert_not_nil(power_set[1])
+    assert_not_nil(power_set[2])
+    assert_not_nil(power_set[3])
+    assert_not_nil(power_set[4])
+
+  end
+
+  def test_remove_from_lateral
+    fp_tree = FpGrowth::FpTree.build([['a', 'b'], ['b'], ['b', 'c'], ['a', 'b'], ['a', 'b', 'c']], 0)
+
+    assert_equal(false, fp_tree.has_lateral_cycle?)
+    fp_tree.remove_from_lateral(fp_tree.heads['c'].lateral)
+    assert_equal(false, fp_tree.has_lateral_cycle?)
+    assert_nil(fp_tree.heads['c'].lateral)
+
+
+    fp_tree = FpGrowth::FpTree.build([['a', 'b'], ['b'], ['b', 'c'], ['a', 'b'], ['a', 'b', 'c']], 0)
+    lebon = fp_tree.heads['c'].lateral
+
+    assert_equal(false, fp_tree.has_lateral_cycle?)
+    fp_tree.remove_from_lateral(fp_tree.heads['c'])
+    assert_equal(false, fp_tree.has_lateral_cycle?)
+    assert_nil(fp_tree.heads['c'].lateral)
+    assert_same(lebon,fp_tree.heads['c'])
+
+    fp_tree = FpGrowth::FpTree.build([['a', 'b'], ['b'], ['b', 'c'], ['a', 'b'], ['a', 'b', 'c']], 0)
+    fp_tree.graphviz
+    fp_tree.heads['c'].lateral.lateral = FpGrowth::FpTree::Node.new('c')
+    apres = fp_tree.heads['c'].lateral.lateral
+    avant = fp_tree.heads['c']
+
+    assert_equal(false, fp_tree.has_lateral_cycle?)
+
+    fp_tree.remove_from_lateral(fp_tree.heads['c'].lateral)
+
+    assert_equal(false, fp_tree.has_lateral_cycle?)
+    assert_nil(fp_tree.heads['c'].lateral.lateral)
+    assert_same(apres,fp_tree.heads['c'].lateral)
+    assert_same(avant,fp_tree.heads['c'])
+
 
   end
 
