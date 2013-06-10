@@ -31,15 +31,29 @@ class TestOpenDataVelo < Test::Unit::TestCase
     patterns = FpGrowth::Miner.fp_growth(fp_tree)
 
     finish = Time.now
-    puts "Tree Mined in #{finish -start}"
+    puts "Tree Mined in #{finish - loop}"
+
 
     patterns.sort! { |a, b| a.support <=> b.support }.reverse!
 
-=begin
+
     for pattern in patterns
       puts "#{pattern.content} #{pattern.support}"
     end
-=end
+
+    loop_td = Time.now
+
+    patterns_td = FpGrowth::Miner.td_fp_growth(fp_tree)
+
+    finish_td = Time.now
+    puts "Tree TDMined in #{finish_td - loop_td}"
+
+
+
+    for pattern in patterns_td
+      puts "#{pattern.content} : #{pattern.support}"
+    end
+
 
     assert_not_equal(0, patterns.size)
   end
