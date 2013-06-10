@@ -1,4 +1,5 @@
 require_relative 'builder/first_pass'
+require_relative 'builder/header_table_builder'
 require_relative 'builder/second_pass'
 
 
