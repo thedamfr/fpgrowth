@@ -52,7 +52,7 @@ module FpGrowth
       def down_to_top_traversal(current_branch=@current_branch, vertical_cursor=@vertical_cursor)
         @vertical_cursor = vertical_cursor
         while @vertical_cursor != nil and @vertical_cursor.item != nil
-          down_to_top_traversal_step()
+          down_to_top_traversal_step(current_branch)
           @vertical_cursor = @vertical_cursor.parent
         end
         current_branch.reverse!
@@ -62,7 +62,7 @@ module FpGrowth
       #
       # It just gather items
       #
-      def down_to_top_traversal_step(current_branch=@current_branch, vertical_cursor=@vertical_cursor, min_support=@min_support)
+      def down_to_top_traversal_step(current_branch=@current_branch, vertical_cursor=@vertical_cursor)
         current_branch << vertical_cursor.item
       end
 
@@ -76,7 +76,7 @@ module FpGrowth
       end
 
       def test_patterns(patterns = [])
-        if  patterns == @pattern_base
+        if  patterns == @patterns
         then  return true
         end
         return false
@@ -88,6 +88,29 @@ module FpGrowth
         end
         return false
       end
+
+      def test_min_support( min_support )
+        if  min_support == @min_support
+        then  return true
+        end
+        return false
+      end
+
+      def test_current_branch (current_branch)
+        if current_branch  == @current_branch
+        then  return true
+        end
+        return false
+      end
+
+      def vertical_cursor (vertical_cursor)
+        if vertical_cursor  == @vertical_cursor
+        then  return true
+        end
+        return false
+      end
+
+
 
 
     end
