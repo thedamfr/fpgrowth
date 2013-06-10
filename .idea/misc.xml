@@ -62,7 +62,7 @@
     <breakpoint_rules />
     <ui_properties />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="RVM: ruby-1.9.3-p392" project-jdk-type="RUBY_SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="RVM: ruby-1.9.3-p429 [global]" project-jdk-type="RUBY_SDK" />
   <component name="masterDetails">
     <states>
       <state key="ProjectJDKs.UI">

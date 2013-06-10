@@ -13,8 +13,9 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="bundler (v1.3.5, RVM: ruby-1.9.3-p392) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="ruby-graphviz (v1.0.9, RVM: ruby-1.9.3-p392) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="bundler (v1.3.5, RVM: ruby-1.9.3-p429 [global]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="json (v1.8.0, RVM: ruby-1.9.3-p429 [global]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="ruby-graphviz (v1.0.9, RVM: ruby-1.9.3-p429 [global]) [gem]" level="application" />
   </component>
 </module>
 
