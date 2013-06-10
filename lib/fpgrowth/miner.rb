@@ -15,6 +15,11 @@ module FpGrowth
       return miner.pattern_set
     end
 
+    def self.td_fp_growth(fp_tree)
+      miner = Miner.new()
+      miner.top_down_fp_growth(fp_tree)
+      return miner.pattern_set
+    end
 
     class Miner
 
@@ -37,7 +42,7 @@ module FpGrowth
           for combination in fp_tree.combinations
             # generate pattern_beta U pattern_alpha
             # with support = minimum support of nodes in pattern_beta
-             pattern_beta = pattern_alpha.clone
+            pattern_beta = pattern_alpha.clone
             for node in combination
               pattern_beta << node
             end
@@ -57,6 +62,26 @@ module FpGrowth
         end
       end
     end
+
+    def top_down_fp_growth(header_table, pattern_alpha=Pattern.new(), min_support=0)
+      if header_table.instance_of? FpTree::FpTree
+        header_table = header_table.header_table
+      end
+      # For each row of header_table
+      for row in header_table.keys
+        # If Support of header_table > min_support
+        if header_table.count[row] > min_support then
+          # output pattern extended with row.item
+          pattern_beta = Pattern.new(pattern_alpha + [row], header_table.count[row])
+          @pattern_set << pattern_beta
+          # Build new Header Table
+          header_table_new = FpTree::HeaderTable.build(row, header_table)
+          # Mine extended pattern, new header table
+          top_down_fp_growth(pattern_beta, header_table_new)
+        end
+      end
+    end
+
 
   end
 end
