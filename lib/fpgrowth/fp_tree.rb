@@ -1,6 +1,7 @@
 require_relative 'fp_tree/node'
 require_relative 'fp_tree/builder'
 require_relative 'fp_tree/bonzai_secateur'
+require_relative 'fp_tree/header_table'
 
 require 'graphviz'
 require 'etc'
@@ -130,10 +131,10 @@ module FpGrowth
             @heads.delete(node.item)
           end
         else
-          puts "node #{node.to_s}"     if verbose
+          puts "node #{node.to_s}" if verbose
           puts "pas head" if verbose
           left = @heads[node.item]
-          while left != nil and not left.equal? node and not  left.lateral.equal? node
+          while left != nil and not left.equal? node and not left.lateral.equal? node
             left = left.lateral
           end
           puts "left found #{left.lateral}" if verbose
@@ -252,6 +253,20 @@ module FpGrowth
         return false
       end
 
+      def header_table
+        unless @header_table
+          @header_table = HeaderTable.new()
+          @header_table.count=@supports
+          for row in @heads
+            node = row
+            while node and node.lateral do
+              @header_table.nodes[node.item] << node
+              node = node.lateral
+            end
+          end
+          return @header_table
+        end
+      end
 
     end
   end
