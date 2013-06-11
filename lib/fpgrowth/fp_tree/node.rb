@@ -41,6 +41,10 @@ module FpGrowth
         return flag
       end
 
+      def to_s
+        "<Node item=#{@item} support=#{@support}>"
+      end
+
     end
   end
 end

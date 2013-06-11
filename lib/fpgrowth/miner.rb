@@ -61,27 +61,34 @@ module FpGrowth
           end
         end
       end
-    end
 
-    def top_down_fp_growth(header_table, pattern_alpha=Pattern.new(), min_support=0)
-      if header_table.instance_of? FpTree::FpTree
-        header_table = header_table.header_table
-      end
-      # For each row of header_table
-      for row in header_table.keys
-        # If Support of header_table > min_support
-        if header_table.count[row] > min_support then
-          # output pattern extended with row.item
-          pattern_beta = Pattern.new(pattern_alpha + [row], header_table.count[row])
-          @pattern_set << pattern_beta
-          # Build new Header Table
-          header_table_new = FpTree::HeaderTable.build(row, header_table)
-          # Mine extended pattern, new header table
-          top_down_fp_growth(pattern_beta, header_table_new)
+      def top_down_fp_growth(header_table, pattern_alpha=Pattern.new(), min_support=0)
+
+        if header_table.instance_of? FpTree::FpTree
+          header_table = header_table.header_table
         end
-      end
-    end
 
+
+        # For each row of header_table
+        for row in header_table.keys
+          # If Support of header_table > min_support
+          if header_table.count[row] > min_support then
+            # output pattern extended with row.item
+            pattern_beta = Pattern.new(pattern_alpha.content + [row], header_table.count[row])
+            @pattern_set << pattern_beta
+            puts "Pattern extracted : #{pattern_beta.content.to_s} - #{pattern_beta.support}"
+            # Build new Header Table
+            header_table_new = FpTree::HeaderTable.build(row, header_table)
+            puts "Header Table for "+row.to_s
+            puts header_table.count.to_s
+            # Mine extended pattern, new header table
+            top_down_fp_growth(header_table_new, pattern_beta)
+          end
+        end
+
+      end
+
+    end #class
 
   end
 end

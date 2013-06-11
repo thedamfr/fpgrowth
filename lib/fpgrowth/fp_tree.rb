@@ -89,7 +89,8 @@ module FpGrowth
         for row in self.heads.values
           node=row
           while node != nil
-            g.add_edges(nodonode[node], nodonode[node.lateral], :style => :dashed, :constraint => :false) if node.lateral
+            g.add_edges(nodonode[node], nodonode[node.lateral], :style => :dashed, :color=> :green, :constraint => :false) if node.lateral
+            g.add_edges(nodonode[node], nodonode[node.parent], :style => :dashed, :color=> :red, :constraint => :false) if node.parent
             node = node.lateral
           end
         end
@@ -219,6 +220,24 @@ module FpGrowth
         return sum
       end
 
+      def sum
+        sum = 0
+        @supports.each { |key, value| sum+=value}
+        return sum
+      end
+
+      def lateral_sum
+        sum=0
+        for cursor in @heads.values
+          while cursor != nil
+            sum+=cursor.support
+            cursor = cursor.lateral
+          end
+
+        end
+        return sum
+      end
+
       def max_width
         max_width=0
         for cursor in @heads.values
@@ -256,11 +275,10 @@ module FpGrowth
       def header_table
         unless @header_table
           @header_table = HeaderTable.new()
-          @header_table.count=@supports
-          for row in @heads
-            node = row
-            while node and node.lateral do
-              @header_table.nodes[node.item] << node
+          for row in @heads.keys
+            node = @heads[row]
+            while node != nil
+              @header_table << [node.item, node.support, node]
               node = node.lateral
             end
           end

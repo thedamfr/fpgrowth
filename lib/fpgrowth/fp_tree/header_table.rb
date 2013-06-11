@@ -1,3 +1,4 @@
+require 'set'
 module FpGrowth
   module FpTree
     class HeaderTable
@@ -10,7 +11,7 @@ module FpGrowth
 
       def initialize()
         @count = Hash.new 0
-        @nodes = Hash.new Array.new
+        @nodes = Hash.new { Set.new() }
       end
 
       attr_accessor :count, :nodes
@@ -19,13 +20,25 @@ module FpGrowth
         @nodes.keys
       end
 
-      def << (y)
+      # Append a Row
+      # @param row Array as  [item, support, node]
+      #
+      def << (row)
         # Add a link for m in HeaderTable
-        @nodes[y.item] << item
+        puts "pour #{row[0]}"
+        puts "avant " + @nodes[row[0]].to_s
+        @nodes[row[0]] = @nodes[row[0]] << row[2]
+        puts "apres " + @nodes[row[0]].to_s
         # Add support m = previous + n
-        @count[y.item] += y.suppport
+        @count[row[0]] += row[1]
       end
 
     end
+  end
+end
+
+class Set
+  def to_s
+    to_a.join(', ')
   end
 end

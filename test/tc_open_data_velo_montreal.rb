@@ -26,33 +26,42 @@ class TestOpenDataVelo < Test::Unit::TestCase
     start = Time.now
     fp_tree = FpGrowth::FpTree.build(@transactions, 1)
     loop = Time.now
-    puts "Tree built in #{loop - start}"
+    puts "Tree built of size #{fp_tree.size} and total item #{fp_tree.sum} / #{fp_tree.lateral_sum} in #{loop - start}"
 
     patterns = FpGrowth::Miner.fp_growth(fp_tree)
 
     finish = Time.now
-    puts "Tree Mined in #{finish - loop}"
 
 
     patterns.sort! { |a, b| a.support <=> b.support }.reverse!
 
 
-    for pattern in patterns
-      puts "#{pattern.content} #{pattern.support}"
+    for pattern in patterns[(0..5)]
+      #puts "#{pattern.content} #{pattern.support}"
     end
+    puts "Tree Mined in #{finish - loop}"
+
+    fp_tree.graphviz "parents"
+    puts fp_tree.supports.to_s
+
+    start_td = Time.now
+    fp_tree_td = FpGrowth::FpTree.build(@transactions, 1)
 
     loop_td = Time.now
 
-    patterns_td = FpGrowth::Miner.td_fp_growth(fp_tree)
+    patterns_td = FpGrowth::Miner.td_fp_growth(fp_tree_td)
+
 
     finish_td = Time.now
-    puts "Tree TDMined in #{finish_td - loop_td}"
 
 
-
+    patterns_td.sort! { |a, b| a.support <=> b.support }.reverse!
     for pattern in patterns_td
       puts "#{pattern.content} : #{pattern.support}"
     end
+    puts "Tree TDMined in #{finish_td - loop_td}"
+    puts "Found #{patterns_td.size} rather than #{patterns.size} with a DeltaTime of #{finish_td - finish}"
+
 
 
     assert_not_equal(0, patterns.size)

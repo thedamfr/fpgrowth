@@ -25,7 +25,7 @@ class TestOpenDataMTLSondage < Test::Unit::TestCase
   end
 
 
-  def test_fp_growth
+  def fp_growth
 
     d = Time.now
     puts "Start time : "+d.to_s

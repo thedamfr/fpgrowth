@@ -1,4 +1,3 @@
-
 module FpGrowth
   module FpTree
     module Builder
@@ -35,16 +34,13 @@ module FpGrowth
         def pruning(transactions=@transactions, supports=@supports, threshold=@threshold)
 
           minimum = transactions.size.to_f / 100 * threshold
-
           for transaction in transactions
-            for item in transaction
-
-              transaction.delete(item) if supports[item] < minimum
-            end
+            transaction.delete_if { |item| supports[item] < minimum }
           end
+          sum = 0
           transactions.delete([])
-          supports.delete_if { |key, value| value < minimum }
 
+          supports.delete_if { |key, value| value < minimum }
           return supports
         end
 
