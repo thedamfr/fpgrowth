@@ -25,10 +25,7 @@ module FpGrowth
       #
       def << (row)
         # Add a link for m in HeaderTable
-        puts "pour #{row[0]}"
-        puts "avant " + @nodes[row[0]].to_s
         @nodes[row[0]] = @nodes[row[0]] << row[2]
-        puts "apres " + @nodes[row[0]].to_s
         # Add support m = previous + n
         @count[row[0]] += row[1]
       end

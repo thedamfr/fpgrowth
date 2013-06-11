@@ -37,7 +37,6 @@ module FpGrowth
           for transaction in transactions
             transaction.delete_if { |item| supports[item] < minimum }
           end
-          sum = 0
           transactions.delete([])
 
           supports.delete_if { |key, value| value < minimum }

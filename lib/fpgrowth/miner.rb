@@ -76,11 +76,9 @@ module FpGrowth
             # output pattern extended with row.item
             pattern_beta = Pattern.new(pattern_alpha.content + [row], header_table.count[row])
             @pattern_set << pattern_beta
-            puts "Pattern extracted : #{pattern_beta.content.to_s} - #{pattern_beta.support}"
+            # puts "Pattern extracted : #{pattern_beta.content.to_s} - #{pattern_beta.support}"
             # Build new Header Table
             header_table_new = FpTree::HeaderTable.build(row, header_table)
-            puts "Header Table for "+row.to_s
-            puts header_table.count.to_s
             # Mine extended pattern, new header table
             top_down_fp_growth(header_table_new, pattern_beta)
           end

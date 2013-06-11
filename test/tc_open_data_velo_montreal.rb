@@ -24,25 +24,33 @@ class TestOpenDataVelo < Test::Unit::TestCase
   # Fake test
   def test_fp_growth
     start = Time.now
-    fp_tree = FpGrowth::FpTree.build(@transactions, 1)
+    fp_tree = FpGrowth::FpTree.build(@transactions.clone, 1)
+
     loop = Time.now
     puts "Tree built of size #{fp_tree.size} and total item #{fp_tree.sum} / #{fp_tree.lateral_sum} in #{loop - start}"
 
-    patterns = FpGrowth::Miner.fp_growth(fp_tree)
+    patterns_rough = FpGrowth::Miner.fp_growth(fp_tree)
 
-    finish = Time.now
-
+    lookup = Hash.new 0
+    patterns_rough.each { |pattern|
+      lookup[pattern.content.sort { |x, y| x[0].to_s <=> y[0].to_s }] += pattern.support
+    }
+    patterns = []
+    lookup.each { |key, value|
+      patterns << FpGrowth::Miner::Pattern.new(key, value)
+    }
 
     patterns.sort! { |a, b| a.support <=> b.support }.reverse!
+    finish = Time.now
+
+    fp_tree.graphviz
 
 
-    for pattern in patterns[(0..5)]
-      #puts "#{pattern.content} #{pattern.support}"
+    for pattern in patterns[0..10]
+      puts "#{pattern.content} #{pattern.support}"
     end
     puts "Tree Mined in #{finish - loop}"
 
-    fp_tree.graphviz "parents"
-    puts fp_tree.supports.to_s
 
     start_td = Time.now
     fp_tree_td = FpGrowth::FpTree.build(@transactions, 1)
@@ -56,12 +64,11 @@ class TestOpenDataVelo < Test::Unit::TestCase
 
 
     patterns_td.sort! { |a, b| a.support <=> b.support }.reverse!
-    for pattern in patterns_td
+    for pattern in patterns_td[0..100]
       puts "#{pattern.content} : #{pattern.support}"
     end
-    puts "Tree TDMined in #{finish_td - loop_td}"
-    puts "Found #{patterns_td.size} rather than #{patterns.size} with a DeltaTime of #{finish_td - finish}"
-
+    puts "Tree built in #{loop_td - start_td} TDMined in #{finish_td - loop_td}"
+    puts "Found #{patterns_td.size} rather than #{patterns.size} with a DeltaTime of #{finish_td - start_td - (finish - start)}"
 
 
     assert_not_equal(0, patterns.size)

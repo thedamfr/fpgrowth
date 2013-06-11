@@ -14,7 +14,6 @@ module FpGrowth
 
         def execute()
           # for each node n in header for item
-          puts "for item :#{@item} I found #{@header_table.nodes[@item]}"
 
 
           for node in @header_table.nodes[@item]
@@ -27,7 +26,6 @@ module FpGrowth
         def traverse_from_node_top_top(node, support)
           if node.item
             # For each node m
-            puts "PSYCHOPATH" if node.item == @item
             @new_header_table << [node.item, support, node]
             traverse_from_node_top_top(node.parent, support)
           end
