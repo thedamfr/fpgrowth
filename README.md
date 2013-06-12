@@ -96,11 +96,11 @@ transactions = [['a', 'b'], ['b'], ['b', 'c'], ['a', 'b']]
 patterns = FpGrowth.fp_growth(transactions)
 ```
 or
- ```ruby
- transactions = [['a', 'b'], ['b'], ['b', 'c'], ['a', 'b']]
- fp_tree = FpGrowth::FpTree.build(transactions, 30)
- bonzai = fp_tree.to_bonzai(20)
- FpGrowth::Miner.fp_growth(bonzai)
+```ruby
+transactions = [['a', 'b'], ['b'], ['b', 'c'], ['a', 'b']]
+fp_tree = FpGrowth::FpTree.build(transactions, 30)
+bonzai = fp_tree.to_bonzai(20)
+FpGrowth::Miner.fp_growth(bonzai)
 
  ```
 
