@@ -44,12 +44,24 @@ Or install it yourself as:
 
 ## Usage
 
+### Basic Usage
+
+Just do it :
+
+```ruby
+transactions = [['a', 'b'], ['b'], ['b', 'c'], ['a', 'b']]
+patterns = FpGrowth.mine(transactions)
+```
+
+### Advanced Usage
+
+
 Build a tree from transactions and mine it
 
 ```ruby
 transactions = [['a', 'b'], ['b'], ['b', 'c'], ['a', 'b']]
 fp_tree = FpGrowth::FpTree.build(transactions)
-FpGrowth::Miner.fp_growth(fp_tree)
+FpGrowth::Miner.td_fp_growth(fp_tree)
 
 ```
 
@@ -61,17 +73,37 @@ The larger is the number of transactions, the smaller should be the threshold. I
 transactions = [['a', 'b'], ['b'], ['b', 'c'], ['a', 'b']]
 fp_tree = FpGrowth::FpTree.build(transactions, 30)
 # 30 stands for 30% of transactions. Here, 'c' would be pruned.
-FpGrowth::Miner.fp_growth(fp_tree)
+FpGrowth::Miner.td_fp_growth(fp_tree)
 
 ```
 
-If you want to avoid worst case, then you should make a Bonzai !
+If you want to avoid worst case, then you should make it a Bonzai !
 ```ruby
+transactions = [['a', 'b'], ['b'], ['b', 'c'], ['a', 'b']]
+fp_tree = FpGrowth::FpTree.build(transactions, 30)
 bonzai = fp_tree.to_bonzai(20)
-FpGrowth::Miner.fp_growth(bonzai)
+FpGrowth::Miner.td_fp_growth(bonzai)
 
 ```
 20 stands for a hardness of 20%. It mean that a node is cut from the tree if it's not greater than 20% of it's father support.
+
+There is two variant of FP-Growth.
+The first one is the TopDown, it's the most efficient, in most cases.
+For some reasons, it's alternative, the classical FpGrowth, it might be more efficient on a very small set.
+Use it this way :
+```ruby
+transactions = [['a', 'b'], ['b'], ['b', 'c'], ['a', 'b']]
+patterns = FpGrowth.fp_growth(transactions)
+```
+or
+ ```ruby
+ transactions = [['a', 'b'], ['b'], ['b', 'c'], ['a', 'b']]
+ fp_tree = FpGrowth::FpTree.build(transactions, 30)
+ bonzai = fp_tree.to_bonzai(20)
+ FpGrowth::Miner.fp_growth(bonzai)
+
+ ```
+
 
 
 ### Examples
