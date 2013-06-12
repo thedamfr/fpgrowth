@@ -62,7 +62,6 @@ Build a tree from transactions and mine it
 transactions = [['a', 'b'], ['b'], ['b', 'c'], ['a', 'b']]
 fp_tree = FpGrowth::FpTree.build(transactions)
 FpGrowth::Miner.td_fp_growth(fp_tree)
-
 ```
 
 By default, threshold for an item to be considered as "frequent" is 1% of the transactions.
@@ -74,7 +73,6 @@ transactions = [['a', 'b'], ['b'], ['b', 'c'], ['a', 'b']]
 fp_tree = FpGrowth::FpTree.build(transactions, 30)
 # 30 stands for 30% of transactions. Here, 'c' would be pruned.
 FpGrowth::Miner.td_fp_growth(fp_tree)
-
 ```
 
 If you want to avoid worst case, then you should make it a Bonzai !
@@ -83,7 +81,6 @@ transactions = [['a', 'b'], ['b'], ['b', 'c'], ['a', 'b']]
 fp_tree = FpGrowth::FpTree.build(transactions, 30)
 bonzai = fp_tree.to_bonzai(20)
 FpGrowth::Miner.td_fp_growth(bonzai)
-
 ```
 20 stands for a hardness of 20%. It mean that a node is cut from the tree if it's not greater than 20% of it's father support.
 
@@ -96,12 +93,12 @@ transactions = [['a', 'b'], ['b'], ['b', 'c'], ['a', 'b']]
 patterns = FpGrowth.fp_growth(transactions)
 ```
 or
+
 ```ruby
 transactions = [['a', 'b'], ['b'], ['b', 'c'], ['a', 'b']]
 fp_tree = FpGrowth::FpTree.build(transactions, 30)
 bonzai = fp_tree.to_bonzai(20)
 FpGrowth::Miner.fp_growth(bonzai)
-
  ```
 
 ### Examples
