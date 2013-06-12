@@ -104,8 +104,6 @@ or
 
  ```
 
-
-
 ### Examples
 
 You can find in the test repository a few concrete example on Open Data.
@@ -113,16 +111,9 @@ You can find in the test repository a few concrete example on Open Data.
 
 ## Development : Next steps
 
-As we said, worst case is a is a DataSet with long transactions and where each item is significantly frequent. Solution would be to higher the threshold level, which would result in data-loss, maybe critical data would be lost...
+We are going to experiment an alternative way of building the tree, which may be more efficient.
 
-A better solution, described is following articles : [<http://dl.acm.org/citation.cfm?id=1133907> , <http://link.springer.com/chapter/10.1007/978-3-540-24775-3_19>]
-Main concept is pruning the tree, once built in order to remove the less significant patterns. This is necessary to allow developer to prune his tree, losing least frequent pattern, in order to quickly obtain the most frequent ones.
-
-This is next step in our Roadmap.
-
-This is also a necessary step for allowing a Top-Down FP-Growth implementation as described in : <http://link.springer.com/chapter/10.1007/3-540-47887-6_34>
-
-This last implementation is more scalable and more efficient than the current one.
+We are also going to experiment TD-FPGrowth(M) and TD-FPGrowth(C). Those are pruning-mining algorithm based on TopDown FPGrowth.
 
 ## Contributing
 
